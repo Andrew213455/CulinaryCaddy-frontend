@@ -1,20 +1,27 @@
-import React from "react";
-import logo from "./logo.svg";
-import "./App.css";
 import {
-  getNutritionById,
-  getRandomRecipes,
-} from "./services/recipeApiService";
+  BrowserRouter as Router,
+  Navigate,
+  Route,
+  Routes,
+} from "react-router-dom";
+import "./App.css";
+import Header from "./components/Header";
+import Main from "./components/Main";
+import InfoCard from "./components/InfoCard";
 
 function App() {
-  getRandomRecipes().then((res) => {
-    console.log(res);
-  });
-  getNutritionById(1003464).then((res) => {
-    console.log(res);
-  });
-
-  return <div className="App"></div>;
+  return (
+    <div className="App">
+      <Router>
+        <Header />
+        <Routes>
+          <Route path="/" element={<Main />} />
+          <Route path="/:id" element={<InfoCard />} />
+          <Route path="*" element={<Navigate to="/" />} />
+        </Routes>
+      </Router>
+    </div>
+  );
 }
 
 export default App;

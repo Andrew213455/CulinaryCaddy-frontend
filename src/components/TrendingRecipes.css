@@ -1,0 +1,5 @@
+.TrendingRecipes .trending-recipe-array {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}

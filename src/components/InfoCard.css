@@ -1,0 +1,13 @@
+.InfoCard {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  height: 100vh;
+  margin-top: 10px;
+}
+
+.InfoCard div {
+  border: 1px solid black;
+  width: 45%;
+  height: 40%;
+}

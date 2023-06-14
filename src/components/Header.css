@@ -1,0 +1,33 @@
+.Header {
+  width: 100%;
+}
+
+.Header .header-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.Header .header-bottom {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.Header h1 {
+  width: 250px;
+}
+
+.Header #search {
+  width: 100%;
+  padding: 10px;
+}
+
+.Header form {
+  width: 100%;
+}
+
+.Header button {
+  padding: 10px 25px;
+}

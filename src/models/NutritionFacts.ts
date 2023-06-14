@@ -1,4 +1,4 @@
-export default interface NutrientObjects {
+interface NutrientObjects {
   name: string;
   amount: number;
   unit: string;
@@ -6,9 +6,5 @@ export default interface NutrientObjects {
 }
 
 export default interface NutritionFacts {
-  calories: string;
-  carbs: string;
-  fat: string;
-  protein: string;
   nutrients: NutrientObjects[];
 }
