@@ -6,5 +6,5 @@ interface NutrientObjects {
 }
 
 export default interface NutritionFacts {
-  nutrients: NutrientObjects;
+  nutrients: NutrientObjects[];
 }
