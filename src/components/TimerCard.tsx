@@ -6,7 +6,6 @@ import { useNavigate, useParams } from "react-router-dom";
 interface Props {
   step: Step;
 }
-
 const TimerCard = ({ step }: Props) => {
   const [hours, setHours] = useState(0);
   const [minutes, setMinutes] = useState(0);
@@ -71,5 +70,4 @@ const TimerCard = ({ step }: Props) => {
     </div>
   );
 };
-
 export default TimerCard;
