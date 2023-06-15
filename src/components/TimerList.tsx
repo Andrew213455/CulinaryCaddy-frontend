@@ -1,16 +1,29 @@
+import { useEffect, useState } from "react";
 import { Step } from "../models/Directions";
+import StepCard from "./StepCard";
 import TimerCard from "./TimerCard";
 import "./TimerList.css";
+import { getRecipeSteps } from "../services/recipeApiService";
+import { useParams } from "react-router-dom";
 
-interface Props {
-  step: Step;
-}
+const TimerList = () => {
+  const [steps, setSteps] = useState<Step[]>([]);
+  const id: string = useParams().id!;
 
-const TimerList = ({ step }: Props) => {
+  useEffect(() => {
+    getRecipeSteps(id).then((res) => {
+      setSteps(res[0].steps);
+    });
+  }, []);
   return (
     <div>
-      <TimerCard step={step} />
-      <button className="start">set timer</button>
+      {steps.map((step, index) => {
+        return step.length !== undefined ? (
+          <StepCard step={step} index={index} />
+        ) : (
+          <></>
+        );
+      })}
     </div>
   );
 };

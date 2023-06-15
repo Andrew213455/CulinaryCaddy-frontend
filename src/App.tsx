@@ -9,6 +9,7 @@ import Header from "./components/Header";
 import Main from "./components/Main";
 import InfoCard from "./components/InfoCard";
 import StepByStep from "./components/StepByStep";
+import TimerList from "./components/TimerList";
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
           <Route path="/" element={<Main />} />
           <Route path="/:id" element={<InfoCard />} />
           <Route path="/steps/:id" element={<StepByStep />} />
+          <Route path="/steps/all/:id" element={<TimerList />} />
           <Route path="*" element={<Navigate to="/" />} />
         </Routes>
       </Router>

@@ -1,16 +1,16 @@
 import { useEffect, useState } from "react";
 import "./StepByStep.css";
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { getRecipeSteps } from "../services/recipeApiService";
 import { Step } from "../models/Directions";
 import StepCard from "./StepCard";
-
 import TimerList from "./TimerList";
 
 const StepByStep = () => {
   const [steps, setSteps] = useState<Step[]>([]);
   const [currentStep, setCurrentStep] = useState<number>(0);
 
+  const navigate = useNavigate();
   const id: string = useParams().id!;
 
   console.log(id);
@@ -26,14 +26,12 @@ const StepByStep = () => {
     <section className="StepByStep">
       <div className="directions">
         <button
-          disabled={currentStep <= 0 ? true : false}
           onClick={() => {
             setCurrentStep(currentStep - 1);
           }}
         >
           previous step
         </button>
-
         <div className="directions-container">
           {steps.map(
             (step, index) =>
@@ -53,18 +51,20 @@ const StepByStep = () => {
               next step
             </button>
           ) : (
-            <Link to={`/${id}`}>
-              <button>Back to Info Page</button>
-            </Link>
+            <button onClick={() => navigate(`/${id}`)}>
+              Back to Info Page
+            </button>
           )}
-          <Link to="/">
-            <button>Back to Home Page</button>
-          </Link>
+          <button onClick={() => navigate(`/`)}>Back to Home Page</button>
+
+          <button onClick={() => navigate(`/steps/all/${id}`)}>
+            See all Timers
+          </button>
         </div>
       </div>
-      <div className="timer">
-        <TimerList step={steps[currentStep]} />
-      </div>
+      {/* <div className="timer">
+        <TimerList step={steps[currentStep]} steps={steps} />
+      </div> */}
     </section>
   );
 };
