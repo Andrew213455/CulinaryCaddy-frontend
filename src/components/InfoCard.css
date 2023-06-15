@@ -4,10 +4,11 @@
   justify-content: space-between;
   height: 100vh;
   margin-top: 10px;
+  color: white;
 }
 
 .InfoCard div {
-  border: 1px solid black;
+  border: 1px solid white;
   width: 45%;
   height: 40%;
 }

@@ -10,7 +10,7 @@ const InfoCard = () => {
   });
 
   const id: string = useParams().id!;
-  console.log(id);
+  console.log(nutritionInfo.nutrients);
 
   useEffect(() => {
     getNutritionById(id).then((res) => {
@@ -22,6 +22,7 @@ const InfoCard = () => {
     <section className="InfoCard">
       <div className="nutrition-div">
         <h2>Nutrition Facts</h2>
+        {/* <p>{nutritionInfo.nutrients.}</p> */}
       </div>
       <div className="setp-by-step">
         <h2>Get your recipe step-by-step</h2>

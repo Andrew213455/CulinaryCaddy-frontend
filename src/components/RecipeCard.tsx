@@ -10,9 +10,12 @@ const RecipeCard = ({ singleRecipe }: Props) => {
   return (
     <div className="RecipeCard">
       {/* <p>{singleRecipe.title}</p> */}
-      <Link to={`/${singleRecipe.id}`}>
-        <img src={singleRecipe.image} alt="food" />
-      </Link>
+      <div>
+        <Link to={`/${singleRecipe.id}`}>
+          <p>{singleRecipe.title}</p>
+          <img src={singleRecipe.image} alt="food" />
+        </Link>
+      </div>
     </div>
   );
 };

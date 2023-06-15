@@ -1,5 +1,31 @@
+.TrendingRecipes {
+  background-color: #1e1e1e;
+  padding: 20px;
+  margin-top: 40px;
+  border-radius: 15px;
+}
+
 .TrendingRecipes .trending-recipe-array {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
+  justify-content: center;
+}
+
+.TrendingRecipes h2 {
+  text-align: center;
+  color: white;
+}
+
+@media only screen and (min-width: 768px) {
+  .TrendingRecipes {
+    background-color: #1e1e1e;
+    padding: 20px;
+    margin-top: 40px;
+    border-radius: 15px;
+  }
+
+  .TrendingRecipes h2 {
+    text-align: center;
+    color: white;
+  }
 }
