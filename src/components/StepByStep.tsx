@@ -30,7 +30,7 @@ const StepByStep = () => {
         >
           previous step
         </button>
-        <h2>Step #</h2>
+
         <div className="directions-container">
           {steps.map(
             (step, index) =>
