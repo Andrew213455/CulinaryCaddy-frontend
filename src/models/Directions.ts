@@ -1,5 +1,6 @@
-interface Step {
-  instruction: string;
+export interface Step {
+  step: string;
+  number: number;
 }
 
 export default interface Directions {

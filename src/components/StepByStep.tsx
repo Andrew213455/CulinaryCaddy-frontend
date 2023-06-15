@@ -2,10 +2,12 @@ import { useEffect, useState } from "react";
 import "./StepByStep.css";
 import { useParams } from "react-router-dom";
 import { getRecipeSteps } from "../services/recipeApiService";
-import Directions from "../models/Directions";
+import { Step } from "../models/Directions";
+import StepCard from "./StepCard";
 
 const StepByStep = () => {
-  const [steps, setSteps] = useState<Directions[]>([]);
+  const [steps, setSteps] = useState<Step[]>([]);
+  const [currentStep, setCurrentStep] = useState<number>(0);
 
   const id: string = useParams().id!;
 
@@ -13,7 +15,7 @@ const StepByStep = () => {
 
   useEffect(() => {
     getRecipeSteps(id).then((res) => {
-      setSteps(res);
+      setSteps(res[0].steps);
     });
   }, []);
 
@@ -21,13 +23,31 @@ const StepByStep = () => {
   return (
     <section className="StepByStep">
       <div className="directions">
-        <button>previous step</button>
+        <button
+          onClick={() => {
+            setCurrentStep(currentStep - 1);
+          }}
+        >
+          previous step
+        </button>
         <h2>Step #</h2>
         <div className="directions-container">
-          <p>Direction: </p>
+          {steps.map(
+            (step, index) =>
+              currentStep === index && (
+                <StepCard key={index} index={index} step={step} />
+              )
+          )}
         </div>
         <div className="button-container">
-          <button className="next">next step</button>
+          <button
+            className="next"
+            onClick={() => {
+              setCurrentStep(currentStep + 1);
+            }}
+          >
+            next step
+          </button>
           <button className="start">set timer</button>
         </div>
       </div>
