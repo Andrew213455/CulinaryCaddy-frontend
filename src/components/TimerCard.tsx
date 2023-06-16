@@ -17,7 +17,11 @@ const TimerCard = ({ step, index }: Props) => {
   const id: string = useParams().id!;
 
   useEffect(() => {
-    setSeconds(timers[index]?.secondsGoneBy);
+    if (trigger === true) {
+      interval = setInterval(() => {
+        setSeconds(timers[index]?.secondsGoneBy);
+      }, 1000);
+    }
   }, [timers[index]?.secondsGoneBy]);
 
   const pauseTimer = () => {
@@ -35,7 +39,7 @@ const TimerCard = ({ step, index }: Props) => {
       <button
         className="start"
         onClick={() => {
-          console.log(step.number);
+          setTrigger(true);
           startTimer(index);
         }}
       >

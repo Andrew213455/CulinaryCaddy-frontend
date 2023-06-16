@@ -1,4 +1,4 @@
-interface NutrientObjects {
+export interface NutrientObjects {
   name: string;
   amount: number;
   unit: string;

@@ -4,6 +4,7 @@ import NutritionFacts from "../models/NutritionFacts";
 import Equipment from "../models/Equipment";
 import Price from "../models/Price";
 import Directions from "../models/Directions";
+import Ingredient from "../models/Ingredient";
 
 const apiKey: string = process.env.REACT_APP_SPOONACULAR_API_KEY || "";
 
@@ -95,7 +96,7 @@ export const getPriceById = (id: string): Promise<Price> => {
     });
 };
 
-export const getIngredientsById = (id: string): Promise<Price> => {
+export const getIngredientsById = (id: string): Promise<Ingredient> => {
   return axios
     .get(
       `https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/${id}/ingredientWidget.json`,

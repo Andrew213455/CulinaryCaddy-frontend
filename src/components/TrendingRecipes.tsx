@@ -13,8 +13,6 @@ const TrendingRecipes = () => {
     });
   }, []);
 
-  console.log(recipes);
-
   return (
     <section className="TrendingRecipes">
       <div>

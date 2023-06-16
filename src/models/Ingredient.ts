@@ -3,18 +3,11 @@ interface US {
   unit: string;
 }
 
-interface Metric {
-  value: number;
-  unit: string;
-}
-
 interface IngredientAmount {
-  measurment?: US;
-  metric?: Metric;
+  measurment: US;
 }
 
 export default interface Ingredient {
   name: string;
-  image: string;
   amount: IngredientAmount;
 }
