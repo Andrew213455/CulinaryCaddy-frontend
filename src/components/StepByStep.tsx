@@ -1,10 +1,10 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import "./StepByStep.css";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { getRecipeSteps } from "../services/recipeApiService";
 import { Step } from "../models/Directions";
 import StepCard from "./StepCard";
-import TimerList from "./TimerList";
+import TimerContext from "../context/TimerContext";
 
 const StepByStep = () => {
   const [steps, setSteps] = useState<Step[]>([]);
@@ -12,16 +12,15 @@ const StepByStep = () => {
 
   const navigate = useNavigate();
   const id: string = useParams().id!;
-
-  console.log(id);
+  const { addTimers } = useContext(TimerContext);
 
   useEffect(() => {
     getRecipeSteps(id).then((res) => {
       setSteps(res[0].steps);
+      addTimers(res[0].steps);
     });
   }, []);
 
-  console.log(steps);
   return (
     <section className="StepByStep">
       <div className="directions">

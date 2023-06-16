@@ -10,7 +10,6 @@ const InfoCard = () => {
   });
 
   const id: string = useParams().id!;
-  console.log(nutritionInfo);
 
   useEffect(() => {
     getNutritionById(id).then((res) => {
