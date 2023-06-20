@@ -6,19 +6,25 @@ import "./TimerList.css";
 import { getRecipeSteps } from "../services/recipeApiService";
 import { useNavigate, useParams } from "react-router-dom";
 import TimerContext from "../context/TimerContext";
+import CurrentRecipeContext from "../context/CurrentRecipeContext";
 
 const TimerList = () => {
   const [steps, setSteps] = useState<Step[]>([]);
   const id: string = useParams().id!;
   const { addTimers } = useContext(TimerContext);
+  const { currentRecipeId, setCurrentRecipeId } =
+    useContext(CurrentRecipeContext);
   const navigate = useNavigate();
 
   useEffect(() => {
     getRecipeSteps(id).then((res) => {
       setSteps(res[0].steps);
-      addTimers(res[0].steps);
+      if ((currentRecipeId && id !== currentRecipeId) || !currentRecipeId) {
+        setCurrentRecipeId(id);
+        addTimers(id);
+      }
     });
-  }, []);
+  }, [id]);
   return (
     <div>
       <button onClick={() => navigate(`/steps/${id}`)}>back to steps</button>

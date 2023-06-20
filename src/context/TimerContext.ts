@@ -1,17 +1,20 @@
 import { createContext } from "react";
 import Timer from "../models/Timer";
-import { Step } from "../models/Directions";
 
 interface TimerContextModel {
   timers: Timer[];
-  addTimers: (steps: Step[]) => void;
+  addTimers: (id: string) => void;
   startTimer: (index: number) => void;
+  pauseTimer: (index: number) => void;
+  updateTimer: (index: number) => void;
 }
 
 const defaultValues: TimerContextModel = {
   timers: [],
   addTimers: () => {},
   startTimer: () => {},
+  pauseTimer: () => {},
+  updateTimer: () => {},
 };
 
 const TimerContext = createContext(defaultValues);

@@ -5,6 +5,7 @@ import { getRecipeSteps } from "../services/recipeApiService";
 import { Step } from "../models/Directions";
 import StepCard from "./StepCard";
 import TimerContext from "../context/TimerContext";
+import CurrentRecipeContext from "../context/CurrentRecipeContext";
 
 const StepByStep = () => {
   const [steps, setSteps] = useState<Step[]>([]);
@@ -13,27 +14,21 @@ const StepByStep = () => {
   const navigate = useNavigate();
   const id: string = useParams().id!;
   const { addTimers } = useContext(TimerContext);
+  const { currentRecipeId, setCurrentRecipeId } =
+    useContext(CurrentRecipeContext);
 
   useEffect(() => {
     getRecipeSteps(id).then((res) => {
       setSteps(res[0].steps);
-      addTimers(res[0].steps);
+      if ((currentRecipeId && id !== currentRecipeId) || !currentRecipeId) {
+        setCurrentRecipeId(id);
+        addTimers(id);
+      }
     });
-  }, []);
-
+  }, [id]);
   return (
     <section className="StepByStep">
       <div className="directions">
-        <div className="directions-container">
-          {steps.map(
-            (step, index) =>
-              currentStep === index && (
-                <StepCard key={index} index={index} step={step} />
-              )
-          )}
-        </div>
-      </div>
-      <div className="button-container">
         <button
           onClick={() => {
             setCurrentStep(currentStep - 1);
@@ -41,22 +36,36 @@ const StepByStep = () => {
         >
           previous step
         </button>
-        <button onClick={() => navigate(`/steps/all/${id}`)}>
-          See all Timers
-        </button>
-        <button onClick={() => navigate(`/`)}>Back to Home Page</button>
-        {currentStep !== steps.length ? (
-          <button
-            className="next"
-            onClick={() => {
-              setCurrentStep(currentStep + 1);
-            }}
-          >
-            next step
+        <div className="directions-container">
+          {steps.map((step, index) => {
+            return (
+              currentStep === index && (
+                <StepCard key={index} index={index} step={step} />
+              )
+            );
+          })}
+        </div>
+        <div className="button-container">
+          {currentStep !== steps.length ? (
+            <button
+              className="next"
+              onClick={() => {
+                setCurrentStep(currentStep + 1);
+              }}
+            >
+              next step
+            </button>
+          ) : (
+            <button onClick={() => navigate(`/${id}`)}>
+              Back to Info Page
+            </button>
+          )}
+          <button onClick={() => navigate(`/`)}>Back to Home Page</button>
+
+          <button onClick={() => navigate(`/steps/all/${id}`)}>
+            See all Timers
           </button>
-        ) : (
-          <button onClick={() => navigate(`/${id}`)}>Back to Info Page</button>
-        )}
+        </div>
       </div>
       {/* <div className="timer">
         <TimerList step={steps[currentStep]} steps={steps} />

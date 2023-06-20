@@ -3,64 +3,71 @@ import { Step } from "../models/Directions";
 import "./TimerCard.css";
 import { useNavigate, useParams } from "react-router-dom";
 import TimerContext from "../context/TimerContext";
+import CurrentRecipeContext from "../context/CurrentRecipeContext";
 
 interface Props {
   step: Step;
   index: number;
 }
 const TimerCard = ({ step, index }: Props) => {
-  const { startTimer, timers } = useContext(TimerContext);
+  const { startTimer, timers, updateTimer, pauseTimer } =
+    useContext(TimerContext);
+
   const [seconds, setSeconds] = useState(0);
-  const [trigger, setTrigger] = useState(false);
-  let interval: NodeJS.Timer | undefined;
+  // console.log(seconds);
+
   const navigate = useNavigate();
   const id: string = useParams().id!;
-
+  console.log(timers);
   useEffect(() => {
-    if (trigger === true) {
-      interval = setInterval(() => {
+    if (timers.length !== 0) {
+      if (timers[index]?.timerStarted && timers[index]?.timeLeftOffAtMs !== 0) {
+        const timeLapsed = Math.floor(
+          (new Date().getTime() - timers[index].timeLeftOffAtMs) / 1000
+        );
+        // console.log(timeLapsed);
+
+        setSeconds(timers[index].secondsGoneBy + timeLapsed);
+        updateTimer(index);
+      } else {
         setSeconds(timers[index]?.secondsGoneBy);
-      }, 1000);
+      }
+      // console.log(timers);
     }
   }, [timers[index]?.secondsGoneBy]);
 
-  const pauseTimer = () => {
-    clearInterval(interval);
-    setTrigger(false);
-  };
+  useEffect(() => {
+    const interval = setInterval(() => {
+      if (timers[index]?.timerStarted) {
+        setSeconds((prev) => prev + 1);
+      }
+    }, 1000);
 
-  const resetTimer = () => {
-    setSeconds(0);
-    pauseTimer();
-  };
+    return () => {
+      // console.log(seconds);
+
+      updateTimer(index);
+      clearInterval(interval);
+    };
+  }, [timers[index]?.timerStarted]);
 
   return (
     <div className="TimerCard">
-      <div className="timerContainer">
-        <div className="time-left">
-          <p>00</p>
-          <div>:</div>
-          <p>{seconds < 10 ? "0" + seconds : seconds}</p>
-        </div>
-        <div className="time-right">
-          <div className="time-status"></div>
-          <button className="reset" onClick={() => resetTimer()}>
-            Reset
-          </button>
-          <button className="pause" onClick={() => pauseTimer()}>
-            Pause
-          </button>
-          <button
-            className="start"
-            onClick={() => {
-              setTrigger(true);
-              startTimer(index);
-            }}
-          >
-            start
-          </button>
-        </div>
+      <button
+        className="start"
+        onClick={() => {
+          // console.log(step.number);
+          // console.log(index);
+          startTimer(index);
+        }}
+      >
+        start timer
+      </button>
+      <button onClick={() => pauseTimer(index)}>pause timer</button>
+      <div>
+        <p>{seconds}</p>
       </div>
+      <button onClick={() => navigate(`/steps/${id}`)}>back to steps</button>
     </div>
   );
 };

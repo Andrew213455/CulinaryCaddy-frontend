@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import "./InfoCard.css";
 import NutritionFacts, { NutrientObjects } from "../models/NutritionFacts";
 import {
@@ -9,6 +9,8 @@ import {
 import { Link, useParams } from "react-router-dom";
 import Ingredient from "../models/Ingredient";
 import Price from "../models/Price";
+import CurrentRecipeContext from "../context/CurrentRecipeContext";
+import TimerContext from "../context/TimerContext";
 const InfoCard = () => {
   const [nutritionInfo, setNutritionInfo] = useState<NutritionFacts>({
     nutrients: [],
@@ -27,9 +29,24 @@ const InfoCard = () => {
       },
     },
   });
-
-  console.log(ingredients);
   const id: string = useParams().id!;
+
+  const { setCurrentRecipeId, currentRecipeId } =
+    useContext(CurrentRecipeContext);
+  const { addTimers } = useContext(TimerContext);
+
+  useEffect(() => {
+    if (id) {
+      getNutritionById(id).then((res) => {
+        setNutritionInfo(res);
+      });
+      if ((currentRecipeId && id !== currentRecipeId) || !currentRecipeId) {
+        setCurrentRecipeId(id);
+        addTimers(id);
+      }
+    }
+  }, [id]);
+
   useEffect(() => {
     getNutritionById(id).then((res) => {
       setNutritionInfo(res);

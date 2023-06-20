@@ -9,7 +9,7 @@ interface Props {
 
 const StepCard = ({ index, step }: Props) => {
   // const [theIndex, setTheIndex] = useState<Directions[]>([0])
-
+  console.log(step);
   return (
     <div className="StepCard">
       <div className="Step-container">

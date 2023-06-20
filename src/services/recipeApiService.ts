@@ -121,11 +121,10 @@ export const getIngredientsById = (id: string): Promise<Ingredient> => {
 export const getRecipeSteps = (id: string): Promise<Directions[]> => {
   return axios
     .get(
-      `https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/${id}/analyzedInstructions?id=${id}`,
+      `https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/${id}/analyzedInstructions`,
       {
         params: {
           id: id,
-          api_key: apiKey,
         },
         headers: {
           "X-RapidAPI-Key":
