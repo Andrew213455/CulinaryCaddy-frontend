@@ -1,3 +1,154 @@
 .TimerCard {
   color: white;
 }
+
+.TimerCard .timerContainer {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+  font-size: 28px;
+  margin: 10px;
+  background-color: grey;
+  color: black;
+  padding: 10px 0 10px 10px;
+}
+
+.TimerCard .time-left {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 10px;
+}
+
+.TimerCard .time-left p {
+  background-color: white;
+  margin: 0px 10px;
+}
+
+.TimerCard .time-right {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.TimerCard .time-status {
+  margin-right: 5px;
+  background-color: yellow;
+  border-radius: 50%;
+  height: 30px;
+  width: 30px;
+}
+
+.TimerCard .start {
+  width: 45px;
+  height: 30px;
+  margin-right: 5px;
+  background-color: #00ff00;
+  border-radius: 5px;
+  border: 1px solid grey;
+  color: white;
+  font-weight: bold;
+  font-size: 12px;
+}
+
+.TimerCard .pause {
+  width: 45px;
+  height: 30px;
+  margin-right: 5px;
+  background-color: #ffa500;
+  border-radius: 5px;
+  border: 1px solid grey;
+  color: white;
+  font-weight: bold;
+  font-size: 12px;
+}
+
+.TimerCard .reset {
+  width: 45px;
+  height: 30px;
+  margin-right: 5px;
+  background-color: red;
+  border-radius: 5px;
+  border: 1px solid grey;
+  color: white;
+  font-weight: bold;
+  font-size: 12px;
+}
+
+@media only screen and (min-width: 425px) {
+  .TimerCard .timerContainer {
+    display: flex;
+    flex-direction: row;
+  }
+
+  .TimerCard .time-left {
+    margin-bottom: 0px;
+  }
+
+  .TimerCard .time-right {
+    width: 350px;
+    justify-content: flex-end;
+  }
+
+  .TimerCard .time-status {
+    height: 30px;
+    width: 30px;
+  }
+
+  .TimerCard .start {
+    width: 55px;
+    height: 30px;
+    font-size: 15px;
+  }
+
+  .TimerCard .pause {
+    width: 55px;
+    height: 30px;
+    font-size: 15px;
+  }
+
+  .TimerCard .reset {
+    width: 55px;
+    height: 30px;
+    font-size: 15px;
+  }
+}
+
+@media only screen and (min-wdith: 768px) {
+  .TimerCard .timerContainer {
+    display: flex;
+    flex-direction: row;
+  }
+
+  .TimerCard .time-left {
+    margin-bottom: 0px;
+  }
+
+  .TimerCard .time-right {
+    width: 350px;
+    justify-content: flex-end;
+  }
+
+  .TimerCard .time-status {
+    height: 50px;
+    width: 50px;
+  }
+
+  .TimerCard .start {
+    width: 75px;
+    height: 50px;
+    font-size: 22px;
+  }
+
+  .TimerCard .pause {
+    width: 75px;
+    height: 50px;
+    font-size: 22px;
+  }
+
+  .TimerCard .reset {
+    width: 75px;
+    height: 50px;
+    font-size: 22px;
+  }
+}

@@ -36,21 +36,31 @@ const TimerCard = ({ step, index }: Props) => {
 
   return (
     <div className="TimerCard">
-      <button
-        className="start"
-        onClick={() => {
-          setTrigger(true);
-          startTimer(index);
-        }}
-      >
-        start timer
-      </button>
-      <div>
-        <p>{seconds}</p>
-        <button onClick={() => pauseTimer()}>Pause</button>
-        <button onClick={() => resetTimer()}>Reset</button>
+      <div className="timerContainer">
+        <div className="time-left">
+          <p>00</p>
+          <div>:</div>
+          <p>{seconds < 10 ? "0" + seconds : seconds}</p>
+        </div>
+        <div className="time-right">
+          <div className="time-status"></div>
+          <button className="reset" onClick={() => resetTimer()}>
+            Reset
+          </button>
+          <button className="pause" onClick={() => pauseTimer()}>
+            Pause
+          </button>
+          <button
+            className="start"
+            onClick={() => {
+              setTrigger(true);
+              startTimer(index);
+            }}
+          >
+            start
+          </button>
+        </div>
       </div>
-      <button onClick={() => navigate(`/steps/${id}`)}>back to steps</button>
     </div>
   );
 };

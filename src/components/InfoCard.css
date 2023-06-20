@@ -1,16 +1,80 @@
 .InfoCard {
   display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  height: 100vh;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   margin-top: 10px;
   color: white;
+  width: 100%;
 }
 
-.InfoCard div {
+.InfoCard .step-by-step {
+  height: 300px;
   border: 1px solid white;
-  width: 45%;
-  height: 45%;
+  width: 95%;
   display: flex;
+}
+
+.InfoCard .nutrition-div {
+  border: 1px solid white;
+  height: 300px;
+  width: 95%;
+  display: flex;
+  flex-direction: column;
+}
+
+.InfoCard .nutrition-div h2 {
+  text-align: center;
+  font-size: 16px;
+}
+
+.InfoCard .nutrition {
+  display: flex;
+  padding: 10px;
+  height: 250px;
+  align-items: flex-start;
+  flex-direction: column;
   flex-wrap: wrap;
+  font-size: 12px;
+}
+
+.InfoCard .nutrition p {
+  width: 120px;
+}
+
+.InfoCard .items-needed {
+  border: 1px solid white;
+  width: 95%;
+}
+
+.InfoCard .price-div {
+  border: 1px solid white;
+  width: 95%;
+}
+
+@media only screen and (min-width: 768px) {
+  .InfoCard {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+
+  .InfoCard .step-by-step {
+    width: 40%;
+    height: 500px;
+  }
+
+  .InfoCard .nutrition-div {
+    width: 40%;
+    height: 500px;
+  }
+
+  .InfoCard .items-needed {
+    width: 40%;
+    height: 500px;
+  }
+
+  .InfoCard .price-div {
+    width: 40%;
+    height: 500px;
+  }
 }

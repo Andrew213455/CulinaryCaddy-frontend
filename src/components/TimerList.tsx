@@ -4,13 +4,14 @@ import StepCard from "./StepCard";
 import TimerCard from "./TimerCard";
 import "./TimerList.css";
 import { getRecipeSteps } from "../services/recipeApiService";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import TimerContext from "../context/TimerContext";
 
 const TimerList = () => {
   const [steps, setSteps] = useState<Step[]>([]);
   const id: string = useParams().id!;
   const { addTimers } = useContext(TimerContext);
+  const navigate = useNavigate();
 
   useEffect(() => {
     getRecipeSteps(id).then((res) => {
@@ -20,6 +21,7 @@ const TimerList = () => {
   }, []);
   return (
     <div>
+      <button onClick={() => navigate(`/steps/${id}`)}>back to steps</button>
       {steps
         .filter((item) => {
           return item.length !== undefined;

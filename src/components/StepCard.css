@@ -1,3 +1,20 @@
 .StepCard {
   color: white;
+  display: flex;
+  flex-direction: column;
+  height: fit-content;
+}
+
+@media only screen and (min-width: 768px) {
+  .StepCard {
+    flex-direction: row;
+  }
+
+  .StepCard .timer-container {
+    width: 50%;
+  }
+
+  .StepCard .step-container {
+    width: 50%;
+  }
 }

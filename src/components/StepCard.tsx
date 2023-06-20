@@ -12,13 +12,17 @@ const StepCard = ({ index, step }: Props) => {
 
   return (
     <div className="StepCard">
-      <h2>Step {step.number}</h2>
-      <p>step: {step.step}</p>
-      {step.length && (
-        <div>
-          <TimerCard step={step} index={index} />
-        </div>
-      )}
+      <div className="Step-container">
+        <h2>Step {step.number}</h2>
+        <p>step: {step.step}</p>
+      </div>
+      <div className="timer-container">
+        {step.length && (
+          <div>
+            <TimerCard step={step} index={index} />
+          </div>
+        )}
+      </div>
     </div>
   );
 };

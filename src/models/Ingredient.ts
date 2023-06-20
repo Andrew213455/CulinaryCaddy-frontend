@@ -4,7 +4,7 @@ interface US {
 }
 
 interface IngredientAmount {
-  measurment: US;
+  us: US;
 }
 
 export default interface Ingredient {
