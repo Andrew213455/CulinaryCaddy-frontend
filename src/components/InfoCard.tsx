@@ -5,12 +5,16 @@ import {
   getIngredientsById,
   getNutritionById,
   getPriceById,
+  getEquipmentById,
+  getRecipeById,
 } from "../services/recipeApiService";
-import { Link, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import Ingredient from "../models/Ingredient";
 import Price from "../models/Price";
+import RecipeInfo from "../models/RecipeInfo";
 import CurrentRecipeContext from "../context/CurrentRecipeContext";
 import TimerContext from "../context/TimerContext";
+import Equipment from "../models/Equipment";
 const InfoCard = () => {
   const [nutritionInfo, setNutritionInfo] = useState<NutritionFacts>({
     nutrients: [],
@@ -21,14 +25,18 @@ const InfoCard = () => {
     totalCostPerServing: 0,
   });
   const [ingredients, setingredients] = useState<Ingredient>({
-    name: "",
-    amount: {
-      us: {
-        value: 0,
-        unit: "",
-      },
-    },
+    ingredients: [{ name: "", amount: { us: { unit: "", value: 0 } } }],
   });
+  const [equipment, setEquipment] = useState<Equipment>({
+    equipment: [{ name: "" }],
+  });
+  const [recipe, setRecipe] = useState<RecipeInfo>({
+    id: "",
+    title: "",
+    instructions: "",
+    image: "",
+  });
+  const navigate = useNavigate();
   const id: string = useParams().id!;
 
   const { setCurrentRecipeId, currentRecipeId } =
@@ -57,7 +65,14 @@ const InfoCard = () => {
     getIngredientsById(id).then((res) => {
       setingredients(res);
     });
+    getEquipmentById(id).then((res) => {
+      setEquipment(res);
+    });
+    getRecipeById(id).then((res) => {
+      setRecipe(res);
+    });
   }, []);
+
   const nutritionArray: NutrientObjects[] = nutritionInfo.nutrients.filter(
     (nutrient) => {
       if (
@@ -77,6 +92,7 @@ const InfoCard = () => {
       }
     }
   );
+
   return (
     <section className="InfoCard">
       <div className="nutrition-div">
@@ -128,14 +144,39 @@ const InfoCard = () => {
           </p>
         </div>
       </div>
-      <Link className="step-by-step" to={`/steps/${id}`}>
-        <div>
-          <h2>Get your recipe step-by-step</h2>
-        </div>
-      </Link>
+
+      <div className="step-by-step">
+        <h2>Get your recipe step-by-step</h2>
+        <h3>{recipe.title}</h3>
+        <img src={recipe.image} alt={recipe.title} />
+        <button onClick={() => navigate(`/steps/rundown/${id}`)}>
+          See all Steps
+        </button>
+        <button onClick={() => navigate(`/steps/${id}`)}>
+          Get Step by Step Breakdown
+        </button>
+      </div>
+
       <div className="items-needed">
         <h2>What you'll need</h2>
-        <div className="ingredients"></div>
+        <div className="items">
+          <div className="ingedients-div">
+            <h3>Ingredients</h3>
+            {ingredients.ingredients.map((item, index) => {
+              return (
+                <p key={index}>
+                  {item.amount.us.value} {item.amount.us.unit} {item.name}
+                </p>
+              );
+            })}
+          </div>
+          <div className="equipment-div">
+            <h3>Equipment</h3>
+            {equipment.equipment.map((item, index) => {
+              return <p key={index}>{item.name}</p>;
+            })}
+          </div>
+        </div>
       </div>
       <div className="price-div">
         <h2>Price Breakdown</h2>

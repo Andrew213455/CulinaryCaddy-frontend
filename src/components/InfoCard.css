@@ -52,6 +52,21 @@
   width: 95%;
 }
 
+.InfoCard .items {
+  display: flex;
+  justify-content: space-around;
+  font-size: 12px;
+}
+
+.InfoCard .items h3 {
+  font-size: 16px;
+  text-align: center;
+}
+
+.InfoCard .items-needed h2 {
+  text-align: center;
+}
+
 @media only screen and (min-width: 768px) {
   .InfoCard {
     flex-direction: row;

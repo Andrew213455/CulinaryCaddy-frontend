@@ -1,4 +1,7 @@
-export default interface Equipment {
+interface EquipmentInfo {
   name: string;
-  image: string;
+}
+
+export default interface Equipment {
+  equipment: EquipmentInfo[];
 }

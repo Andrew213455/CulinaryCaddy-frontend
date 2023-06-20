@@ -1,17 +1,31 @@
 import { useEffect, useState } from "react";
 import "./TrendingRecipes.css";
 import Recipe from "../models/Recipe";
-import { getRandomRecipes } from "../services/recipeApiService";
+import {
+  getRandomRecipes,
+  getSearchRecipe,
+} from "../services/recipeApiService";
 import RecipeCard from "./RecipeCard";
 
-const TrendingRecipes = () => {
+interface Props {
+  query: string | null;
+}
+
+const TrendingRecipes = ({ query }: Props) => {
   const [recipes, setRecipes] = useState<Recipe[]>([]);
 
   useEffect(() => {
-    getRandomRecipes().then((res) => {
-      setRecipes(res.recipes);
-    });
-  }, []);
+    {
+      query
+        ? getSearchRecipe(query).then((res) => {
+            setRecipes(res.results);
+            console.log(res);
+          })
+        : getRandomRecipes().then((res) => {
+            setRecipes(res.recipes);
+          });
+    }
+  }, [query]);
 
   return (
     <section className="TrendingRecipes">

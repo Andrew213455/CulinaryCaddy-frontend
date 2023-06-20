@@ -1,13 +1,17 @@
-interface US {
-  value: number;
+interface UsAmount {
   unit: string;
+  value: number;
 }
 
-interface IngredientAmount {
-  us: US;
+interface Amount {
+  us: UsAmount;
+}
+
+interface IngredientList {
+  name: string;
+  amount: Amount;
 }
 
 export default interface Ingredient {
-  name: string;
-  amount: IngredientAmount;
+  ingredients: IngredientList[];
 }

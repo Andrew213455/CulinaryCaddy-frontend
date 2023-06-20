@@ -4,15 +4,18 @@ import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import TimerContextProvider from "./context/TimerContextProvider";
+import CurrentRecipeContextProvider from "./context/CurrentRecipeContextProvider";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
 );
 root.render(
   <React.StrictMode>
-    <TimerContextProvider>
-      <App />
-    </TimerContextProvider>
+    <CurrentRecipeContextProvider>
+      <TimerContextProvider>
+        <App />
+      </TimerContextProvider>
+    </CurrentRecipeContextProvider>
   </React.StrictMode>
 );
 

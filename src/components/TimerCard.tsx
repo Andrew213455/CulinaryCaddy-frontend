@@ -34,7 +34,7 @@ const TimerCard = ({ step, index }: Props) => {
       }
       // console.log(timers);
     }
-  }, [timers[index]?.secondsGoneBy]);
+  }, []);
 
   useEffect(() => {
     const interval = setInterval(() => {

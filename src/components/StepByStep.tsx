@@ -13,7 +13,7 @@ const StepByStep = () => {
 
   const navigate = useNavigate();
   const id: string = useParams().id!;
-  const { addTimers } = useContext(TimerContext);
+  const { addTimers, timers } = useContext(TimerContext);
   const { currentRecipeId, setCurrentRecipeId } =
     useContext(CurrentRecipeContext);
 
@@ -40,7 +40,13 @@ const StepByStep = () => {
           {steps.map((step, index) => {
             return (
               currentStep === index && (
-                <StepCard key={index} index={index} step={step} />
+                <StepCard
+                  key={index}
+                  index={
+                    timers.findIndex((timer) => timer.step === step.number) || 0
+                  }
+                  step={step}
+                />
               )
             );
           })}
