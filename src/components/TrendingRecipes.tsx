@@ -6,6 +6,7 @@ import {
   getSearchRecipe,
 } from "../services/recipeApiService";
 import RecipeCard from "./RecipeCard";
+import Directions from "../models/Directions";
 
 interface Props {
   query: string | null;
@@ -13,6 +14,7 @@ interface Props {
 
 const TrendingRecipes = ({ query }: Props) => {
   const [recipes, setRecipes] = useState<Recipe[]>([]);
+  const [hasSteps, setHasSteps] = useState<Directions[]>([]);
 
   useEffect(() => {
     {

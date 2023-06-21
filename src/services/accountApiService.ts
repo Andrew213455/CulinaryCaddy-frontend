@@ -19,6 +19,10 @@ export const deleteAccount = (id: string): Promise<Account> => {
   return axios.delete(`${baseURL}/account/${id}`).then((res) => res.data);
 };
 
+export const addFavorite = (id: string): Promise<Account> => {
+  return axios.patch(`${baseURL}/users/${id}`).then((res) => res.data);
+};
+
 export const updateAccount = (
   id: string,
   updatedAccount: Account
