@@ -1,5 +1,5 @@
 .TrendingRecipes {
-  background-color: #1e1e1e;
+  background-color: transparent;
   padding: 20px;
   margin-top: 40px;
   border-radius: 15px;
@@ -18,7 +18,7 @@
 
 @media only screen and (min-width: 768px) {
   .TrendingRecipes {
-    background-color: #1e1e1e;
+    background-color: transparent;
     padding: 20px;
     margin-top: 40px;
     border-radius: 15px;

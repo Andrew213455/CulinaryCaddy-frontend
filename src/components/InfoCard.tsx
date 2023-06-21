@@ -95,6 +95,20 @@ const InfoCard = () => {
 
   return (
     <section className="InfoCard">
+      <div className="step-by-step">
+        <div className="picture-div">
+          <h2>Get your recipe step-by-step</h2>
+          <h3>{recipe.title}</h3>
+          <img src={recipe.image} alt={recipe.title} />
+        </div>
+        <div className="button-div">
+          <button onClick={() => navigate(`/steps/rundown/${id}`)}>
+            All Steps
+          </button>
+          <button onClick={() => navigate(`/steps/${id}`)}>Step by Step</button>
+        </div>
+      </div>
+
       <div className="nutrition-div">
         <h2>Nutrition Facts</h2>
         <div className="nutrition">
@@ -145,18 +159,6 @@ const InfoCard = () => {
         </div>
       </div>
 
-      <div className="step-by-step">
-        <h2>Get your recipe step-by-step</h2>
-        <h3>{recipe.title}</h3>
-        <img src={recipe.image} alt={recipe.title} />
-        <button onClick={() => navigate(`/steps/rundown/${id}`)}>
-          See all Steps
-        </button>
-        <button onClick={() => navigate(`/steps/${id}`)}>
-          Get Step by Step Breakdown
-        </button>
-      </div>
-
       <div className="items-needed">
         <h2>What you'll need</h2>
         <div className="items">
@@ -180,16 +182,22 @@ const InfoCard = () => {
       </div>
       <div className="price-div">
         <h2>Price Breakdown</h2>
-        <ul>
-          {priceInfo.ingredients.map((items) => {
-            return `Measurement: ${items.amount.us.value} ${
-              items.amount.us.unit
-            } Ingredient: ${items.name} Cost: $${(items.price / 100).toFixed(
-              2
-            )}`;
+        <div>
+          {priceInfo.ingredients.map((items, index) => {
+            return (
+              <div className="prices">
+                <span className="bolder">
+                  Measurement {index + 1} : {items.amount.us.value}{" "}
+                  {items.amount.us.unit}
+                </span>
+                <span className="bolder">Ingredient: {items.name} </span>
+                <span className="bold">
+                  Cost: ${(items.price / 100).toFixed(2)}
+                </span>
+              </div>
+            );
           })}
-        </ul>
-        <p></p>
+        </div>
         <p>Total Cost: ${(priceInfo.totalCost / 100).toFixed(2)}</p>
         <p>
           Total Cost Per Serving: $

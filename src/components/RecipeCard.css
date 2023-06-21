@@ -21,6 +21,13 @@
   border-radius: 10px;
 }
 
+.RecipeCard .image-container {
+  background-color: black;
+  border-radius: 10px;
+  height: 225px;
+  box-shadow: 6px 6px 0 0 black;
+}
+
 .RecipeCard p {
   position: absolute;
   z-index: 2;
@@ -47,6 +54,12 @@
     object-fit: cover;
   }
 
+  .RecipeCard .image-container {
+    background-color: black;
+    border-radius: 10px;
+    height: 152px;
+  }
+
   .RecipeCard p {
     width: 140px;
   }
@@ -64,6 +77,12 @@
     height: 175px;
     width: 175px;
     object-fit: cover;
+  }
+
+  .RecipeCard .image-container {
+    background-color: black;
+    border-radius: 10px;
+    height: 175px;
   }
 
   .RecipeCard p {
