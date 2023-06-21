@@ -10,7 +10,7 @@ interface Props {
   index: number;
 }
 const TimerCard = ({ step, index }: Props) => {
-  const { startTimer, timers, updateTimer, pauseTimer } =
+  const { startTimer, timers, pauseTimer, resetTimer } =
     useContext(TimerContext);
 
   const [seconds, setSeconds] = useState(0);
@@ -18,38 +18,10 @@ const TimerCard = ({ step, index }: Props) => {
 
   const navigate = useNavigate();
   const id: string = useParams().id!;
-  console.log(timers);
-  useEffect(() => {
-    if (timers.length !== 0) {
-      if (timers[index]?.timerStarted && timers[index]?.timeLeftOffAtMs !== 0) {
-        const timeLapsed = Math.floor(
-          (new Date().getTime() - timers[index].timeLeftOffAtMs) / 1000
-        );
-        // console.log(timeLapsed);
-
-        setSeconds(timers[index].secondsGoneBy + timeLapsed);
-        updateTimer(index);
-      } else {
-        setSeconds(timers[index]?.secondsGoneBy);
-      }
-      // console.log(timers);
-    }
-  }, []);
 
   useEffect(() => {
-    const interval = setInterval(() => {
-      if (timers[index]?.timerStarted) {
-        setSeconds((prev) => prev + 1);
-      }
-    }, 1000);
-
-    return () => {
-      // console.log(seconds);
-
-      updateTimer(index);
-      clearInterval(interval);
-    };
-  }, [timers[index]?.timerStarted]);
+    setSeconds(timers[index].secondsGoneBy);
+  }, [timers[index].secondsGoneBy]);
 
   return (
     <div className="TimerCard">
@@ -63,6 +35,7 @@ const TimerCard = ({ step, index }: Props) => {
       >
         start timer
       </button>
+      <button onClick={() => resetTimer(index)}>Reset Timer</button>
       <button onClick={() => pauseTimer(index)}>pause timer</button>
       <div>
         <p>{seconds}</p>

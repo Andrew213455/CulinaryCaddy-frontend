@@ -24,7 +24,6 @@ const TimerContextProvider = ({ children }: Props) => {
             secondsGoneBy: 0,
             maximumSeconds: step.length?.number! * 60,
             timerStarted: false,
-            timeLeftOffAtMs: 0,
           };
           newTimers.push(timer);
           setTimers(newTimers);
@@ -37,20 +36,7 @@ const TimerContextProvider = ({ children }: Props) => {
     setTimers((prev) => {
       const copy = { ...prev[index] };
       copy.timerStarted = true;
-      copy.timeLeftOffAtMs = new Date().getTime();
-      return [...prev.slice(0, index), copy, ...prev.slice(index + 1)];
-    });
-  };
 
-  const updateTimer = (index: number): void => {
-    setTimers((prev) => {
-      const copy = { ...prev[index] };
-      if (copy.timeLeftOffAtMs !== 0 && copy.timerStarted) {
-        copy.secondsGoneBy += Math.round(
-          (new Date().getTime() - copy.timeLeftOffAtMs) / 1000
-        );
-        copy.timeLeftOffAtMs = new Date().getTime();
-      }
       return [...prev.slice(0, index), copy, ...prev.slice(index + 1)];
     });
   };
@@ -58,17 +44,34 @@ const TimerContextProvider = ({ children }: Props) => {
   const pauseTimer = (index: number): void => {
     setTimers((prev) => {
       const copy = { ...prev[index] };
-      if (copy.timeLeftOffAtMs !== 0 && copy.timerStarted) {
-        copy.secondsGoneBy += Math.round(
-          (new Date().getTime() - copy.timeLeftOffAtMs) / 1000
-        );
-      }
       copy.timerStarted = false;
       return [...prev.slice(0, index), copy, ...prev.slice(index + 1)];
     });
   };
 
-  useEffect(() => {}, []);
+  const resetTimer = (index: number): void => {
+    setTimers((prev) => {
+      const copy = { ...prev[index] };
+      copy.timerStarted = false;
+      copy.secondsGoneBy = 0;
+      return [...prev.slice(0, index), copy, ...prev.slice(index + 1)];
+    });
+  };
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setTimers((prev) => {
+        const copyOfTimers = [...prev];
+        copyOfTimers.forEach((timer) => {
+          if (timer.timerStarted) {
+            timer.secondsGoneBy++;
+          }
+        });
+        return copyOfTimers;
+      });
+    }, 1000);
+    return () => clearInterval(interval);
+  }, []);
 
   return (
     <TimerContext.Provider
@@ -77,7 +80,7 @@ const TimerContextProvider = ({ children }: Props) => {
         addTimers,
         startTimer,
         pauseTimer,
-        updateTimer,
+        resetTimer,
       }}
     >
       {children}

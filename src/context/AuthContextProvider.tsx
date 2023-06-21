@@ -32,8 +32,18 @@ function AuthContextProvider({ children }: { children: ReactNode }) {
       }
     });
   }, []);
+  const checkFavorite = (id: string): boolean => {
+    let fave = false;
+    account?.favorites.map((recipe) => {
+      if (recipe.id === id) {
+        fave = true;
+      }
+    });
+    return fave;
+  };
+
   return (
-    <AuthContext.Provider value={{ user, account }}>
+    <AuthContext.Provider value={{ user, account, checkFavorite }}>
       {children}
     </AuthContext.Provider>
   );

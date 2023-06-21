@@ -6,7 +6,7 @@ interface TimerContextModel {
   addTimers: (id: string) => void;
   startTimer: (index: number) => void;
   pauseTimer: (index: number) => void;
-  updateTimer: (index: number) => void;
+  resetTimer: (index: number) => void;
 }
 
 const defaultValues: TimerContextModel = {
@@ -14,7 +14,7 @@ const defaultValues: TimerContextModel = {
   addTimers: () => {},
   startTimer: () => {},
   pauseTimer: () => {},
-  updateTimer: () => {},
+  resetTimer: () => {},
 };
 
 const TimerContext = createContext(defaultValues);

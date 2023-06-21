@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import "./TrendingRecipes.css";
 import Recipe from "../models/Recipe";
 import {
@@ -7,6 +7,9 @@ import {
 } from "../services/recipeApiService";
 import RecipeCard from "./RecipeCard";
 import Directions from "../models/Directions";
+import Favorites from "./Favorites";
+import AuthContext from "../context/AuthContext";
+import { addFavorite } from "../services/accountApiService";
 
 interface Props {
   query: string | null;
@@ -14,7 +17,7 @@ interface Props {
 
 const TrendingRecipes = ({ query }: Props) => {
   const [recipes, setRecipes] = useState<Recipe[]>([]);
-  const [hasSteps, setHasSteps] = useState<Directions[]>([]);
+  const { user, account } = useContext(AuthContext);
 
   useEffect(() => {
     {
@@ -32,6 +35,7 @@ const TrendingRecipes = ({ query }: Props) => {
   return (
     <section className="TrendingRecipes">
       <div>
+        {user && <Favorites />}
         <h2>Trending Recipes</h2>
       </div>
       <div className="trending-recipe-array">

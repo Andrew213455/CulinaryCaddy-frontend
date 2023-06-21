@@ -3,5 +3,4 @@ export default interface Timer {
   secondsGoneBy: number;
   maximumSeconds: number;
   timerStarted: boolean;
-  timeLeftOffAtMs: number;
 }

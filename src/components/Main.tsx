@@ -13,7 +13,6 @@ const Main = () => {
 
   return (
     <div className="Main">
-      {user && <Favorites />}
       <TrendingRecipes query={query} />
     </div>
   );
