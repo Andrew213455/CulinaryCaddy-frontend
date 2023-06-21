@@ -5,17 +5,20 @@ import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import TimerContextProvider from "./context/TimerContextProvider";
 import CurrentRecipeContextProvider from "./context/CurrentRecipeContextProvider";
+import AuthContextProvider from "./context/AuthContextProvider";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
 );
 root.render(
   <React.StrictMode>
-    <CurrentRecipeContextProvider>
-      <TimerContextProvider>
-        <App />
-      </TimerContextProvider>
-    </CurrentRecipeContextProvider>
+    <AuthContextProvider>
+      <CurrentRecipeContextProvider>
+        <TimerContextProvider>
+          <App />
+        </TimerContextProvider>
+      </CurrentRecipeContextProvider>
+    </AuthContextProvider>
   </React.StrictMode>
 );
 

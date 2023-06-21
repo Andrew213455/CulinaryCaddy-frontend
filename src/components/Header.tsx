@@ -1,10 +1,13 @@
 import { Link, useNavigate } from "react-router-dom";
 import "./Header.css";
-import { FormEvent, useState } from "react";
+import { FormEvent, useContext, useState } from "react";
+import AuthContext from "../context/AuthContext";
+import { signInWithGoogle, signOut } from "../firebaseConfig";
 
 const Header = () => {
   const [search, setSearch] = useState("");
   const navigate = useNavigate();
+  const { user } = useContext(AuthContext);
   const submitHandler = (e: FormEvent): void => {
     e.preventDefault();
     navigate(`/search?${new URLSearchParams({ search: search })}`);
@@ -16,7 +19,11 @@ const Header = () => {
         <Link to="/">
           <h1>Culinary Caddy</h1>
         </Link>
-        <button className="login">Login</button>
+        {user ? (
+          <button onClick={signOut}>Sign Out</button>
+        ) : (
+          <button onClick={signInWithGoogle}>Sign In With Google</button>
+        )}
       </div>
       <div className="header-bottom">
         <form onSubmit={submitHandler}>

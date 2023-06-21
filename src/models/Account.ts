@@ -1,7 +1,9 @@
+import Recipe from "./Recipe";
+
 export default interface Account {
-  id?: string;
+  _id?: string;
+  googleId: string;
   name: string;
-  favorites: string[];
-  allergy: string;
+  favorites: Recipe[];
   photoURL: string;
 }

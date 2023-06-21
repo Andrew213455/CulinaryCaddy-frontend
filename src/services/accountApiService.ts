@@ -15,6 +15,10 @@ export const addAccount = (newAccount: Account): Promise<Account> => {
   return axios.post(`${baseURL}/accounts`, newAccount).then((res) => res.data);
 };
 
+export const deleteAccount = (id: string): Promise<Account> => {
+  return axios.delete(`${baseURL}/account/${id}`).then((res) => res.data);
+};
+
 export const updateAccount = (
   id: string,
   updatedAccount: Account
