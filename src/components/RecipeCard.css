@@ -30,6 +30,7 @@
 
 .RecipeCard p {
   position: absolute;
+  margin-left: 10px;
   z-index: 2;
   width: 200px;
   text-decoration: none;
@@ -38,10 +39,23 @@
   font-weight: bold;
 }
 
-@media only screen and (min-width: 425px) {
+.RecipeCard .heart-container {
+  margin-top: -30px;
+  margin-left: 10px;
+  z-index: 2;
+  position: absolute;
+}
+
+.RecipeCard .heart {
+  font-size: 20px;
+  z-index: 4;
+  color: white;
+}
+
+@media only screen and (min-width: 440px) {
   .RecipeCard {
-    height: 152.5px;
-    width: 152.5px;
+    height: 150px;
+    width: 150px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -49,15 +63,15 @@
   }
 
   .RecipeCard img {
-    height: 152.5px;
-    width: 152.5px;
+    height: 150px;
+    width: 150px;
     object-fit: cover;
   }
 
   .RecipeCard .image-container {
     background-color: black;
     border-radius: 10px;
-    height: 152px;
+    height: 150px;
   }
 
   .RecipeCard p {

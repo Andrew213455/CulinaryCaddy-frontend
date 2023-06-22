@@ -5,6 +5,12 @@
   border-radius: 15px;
 }
 
+.TrendingRecipes .favorite {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
 .TrendingRecipes .trending-recipe-array {
   display: flex;
   flex-wrap: wrap;

@@ -34,10 +34,14 @@ const TrendingRecipes = ({ query }: Props) => {
 
   return (
     <section className="TrendingRecipes">
-      <div>
-        {user && <Favorites />}
-        <h2>Trending Recipes</h2>
+      {user && <h2>Favorite Recipes</h2>}
+      <div className="favorite">
+        {user &&
+          account?.favorites!.map((recipe) => {
+            return <Favorites key={recipe.id} singleRecipe={recipe} />;
+          })}
       </div>
+      <h2>Trending Recipes</h2>
       <div className="trending-recipe-array">
         {recipes.map((recipe) => {
           return (

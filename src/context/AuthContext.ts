@@ -5,11 +5,13 @@ export interface AuthContextModel {
   user: User | null; // null when not logged in
   account: Account | null;
   checkFavorite: (id: string) => boolean;
+  setAccount: (account: Account) => void;
 }
 const defaultValue: AuthContextModel = {
   user: null,
   account: null,
   checkFavorite: () => false,
+  setAccount: () => {},
 };
 const AuthContext = createContext(defaultValue);
 export default AuthContext;

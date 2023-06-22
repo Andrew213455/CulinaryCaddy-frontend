@@ -29,13 +29,6 @@ const StepByStep = () => {
   return (
     <section className="StepByStep">
       <div className="directions">
-        <button
-          onClick={() => {
-            setCurrentStep(currentStep - 1);
-          }}
-        >
-          previous step
-        </button>
         <div className="directions-container">
           {steps.map((step, index) => {
             return (
@@ -52,6 +45,18 @@ const StepByStep = () => {
           })}
         </div>
         <div className="button-container">
+          <button
+            disabled={currentStep === 0}
+            onClick={() => {
+              setCurrentStep(currentStep - 1);
+            }}
+          >
+            previous step
+          </button>
+          <button onClick={() => navigate(`/`)}>Back to Home Page</button>
+          <button onClick={() => navigate(`/steps/all/${id}`)}>
+            See all Timers
+          </button>
           {currentStep !== steps.length ? (
             <button
               className="next"
@@ -66,11 +71,6 @@ const StepByStep = () => {
               Back to Info Page
             </button>
           )}
-          <button onClick={() => navigate(`/`)}>Back to Home Page</button>
-
-          <button onClick={() => navigate(`/steps/all/${id}`)}>
-            See all Timers
-          </button>
         </div>
       </div>
       {/* <div className="timer">

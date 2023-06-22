@@ -16,7 +16,7 @@ export const getRandomRecipes = (): Promise<RecipeResponse> => {
       "https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/random",
       {
         params: {
-          number: 100,
+          number: 30,
           api_key: apiKey,
         },
         headers: {
