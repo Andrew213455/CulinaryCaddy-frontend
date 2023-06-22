@@ -21,7 +21,9 @@ export const deleteAccount = (id: string): Promise<Account> => {
 };
 
 export const addFavorite = (id: string, recipe: Recipe): Promise<Account> => {
-  return axios.patch(`${baseURL}/users/${id}`, recipe).then((res) => res.data);
+  return axios
+    .patch(`${baseURL}/fave/add/${id}`, recipe)
+    .then((res) => res.data);
 };
 
 export const deleteFavorite = (
@@ -29,7 +31,7 @@ export const deleteFavorite = (
   recipe: Recipe
 ): Promise<Account> => {
   return axios
-    .patch(`${baseURL}/users/favorites/${id}`, recipe)
+    .patch(`${baseURL}/fave/delete/${id}`, recipe)
     .then((res) => res.data);
 };
 

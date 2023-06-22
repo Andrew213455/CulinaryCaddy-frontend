@@ -75,12 +75,12 @@ const InfoCard = () => {
   }, [id]);
 
   useEffect(() => {
-    if (recipe) {
+    if (recipe && account) {
       console.log(checkFavorite(recipe.id));
 
       setIsFave(checkFavorite(recipe.id));
     }
-  }, [account, id]);
+  }, [account, recipe]);
 
   const nutritionArray: NutrientObjects[] = nutritionInfo.nutrients.filter(
     (nutrient) => {
@@ -118,7 +118,7 @@ const InfoCard = () => {
           </button>
           {account && (
             <div className="heart-container">
-              {isFave ? (
+              {!isFave ? (
                 <i
                   className="fa-regular fa-heart heart"
                   onClick={() =>
