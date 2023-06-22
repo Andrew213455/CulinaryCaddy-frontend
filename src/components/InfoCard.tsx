@@ -15,7 +15,15 @@ import RecipeInfo from "../models/RecipeInfo";
 import CurrentRecipeContext from "../context/CurrentRecipeContext";
 import TimerContext from "../context/TimerContext";
 import Equipment from "../models/Equipment";
+import AuthContext from "../context/AuthContext";
+import {
+  addFavorite,
+  deleteFavorite,
+  getAccountById,
+} from "../services/accountApiService";
+import Recipe from "../models/Recipe";
 const InfoCard = () => {
+  const [isFave, setIsFave] = useState(false);
   const [nutritionInfo, setNutritionInfo] = useState<NutritionFacts>({
     nutrients: [],
   });
@@ -30,24 +38,17 @@ const InfoCard = () => {
   const [equipment, setEquipment] = useState<Equipment>({
     equipment: [{ name: "" }],
   });
-  const [recipe, setRecipe] = useState<RecipeInfo>({
-    id: "",
-    title: "",
-    instructions: "",
-    image: "",
-  });
+  const [recipe, setRecipe] = useState<Recipe | null>(null);
   const navigate = useNavigate();
   const id: string = useParams().id!;
 
   const { setCurrentRecipeId, currentRecipeId } =
     useContext(CurrentRecipeContext);
   const { addTimers } = useContext(TimerContext);
+  const { account, checkFavorite, setAccount } = useContext(AuthContext);
 
   useEffect(() => {
     if (id) {
-      getNutritionById(id).then((res) => {
-        setNutritionInfo(res);
-      });
       if ((currentRecipeId && id !== currentRecipeId) || !currentRecipeId) {
         setCurrentRecipeId(id);
         addTimers(id);
@@ -71,7 +72,15 @@ const InfoCard = () => {
     getRecipeById(id).then((res) => {
       setRecipe(res);
     });
-  }, []);
+  }, [id]);
+
+  useEffect(() => {
+    if (recipe) {
+      console.log(checkFavorite(recipe.id));
+
+      setIsFave(checkFavorite(recipe.id));
+    }
+  }, [account, id]);
 
   const nutritionArray: NutrientObjects[] = nutritionInfo.nutrients.filter(
     (nutrient) => {
@@ -93,18 +102,48 @@ const InfoCard = () => {
     }
   );
 
+  console.log(account);
+
   return (
     <section className="InfoCard">
       <div className="step-by-step">
         <div className="picture-div">
           <h2>Get your recipe step-by-step</h2>
-          <h3>{recipe.title}</h3>
-          <img src={recipe.image} alt={recipe.title} />
+          <h3>{recipe?.title}</h3>
+          <img src={recipe?.image} alt={recipe?.title} />
         </div>
         <div className="button-div">
           <button onClick={() => navigate(`/steps/rundown/${id}`)}>
             All Steps
           </button>
+          {account && (
+            <div className="heart-container">
+              {isFave ? (
+                <i
+                  className="fa-regular fa-heart heart"
+                  onClick={() =>
+                    addFavorite(account?.googleId!, recipe!).then(() => {
+                      getAccountById(account.googleId).then((res) => {
+                        setAccount(res);
+                      });
+                    })
+                  }
+                ></i>
+              ) : (
+                <i
+                  className="fa-solid fa-heart heart"
+                  onClick={() =>
+                    deleteFavorite(account?.googleId!, recipe!).then(() => {
+                      console.log(account, recipe);
+                      getAccountById(account.googleId).then((res) => {
+                        setAccount(res);
+                      });
+                    })
+                  }
+                ></i>
+              )}
+            </div>
+          )}
           <button onClick={() => navigate(`/steps/${id}`)}>Step by Step</button>
         </div>
       </div>

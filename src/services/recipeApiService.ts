@@ -7,8 +7,50 @@ import Directions from "../models/Directions";
 import Ingredient from "../models/Ingredient";
 import Recipe from "../models/Recipe";
 import SearchResults from "../models/SearchResults";
+import Joke from "../models/Joke";
 
 const apiKey: string = process.env.REACT_APP_SPOONACULAR_API_KEY || "";
+
+export const getRandomJoke = (): Promise<Joke> => {
+  return axios
+    .get(
+      "https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/food/jokes/random",
+      {
+        params: {
+          api_key: apiKey,
+        },
+        headers: {
+          "X-RapidAPI-Key":
+            "7239c9fe03msh344af59194121e4p14330ajsnc7a5bf2c2824",
+          "X-RapidAPI-Host":
+            "spoonacular-recipe-food-nutrition-v1.p.rapidapi.com",
+        },
+      }
+    )
+    .then((res) => {
+      return res.data;
+    });
+};
+export const getRandomTrivia = (): Promise<Joke> => {
+  return axios
+    .get(
+      "https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/food/trivia/random",
+      {
+        params: {
+          api_key: apiKey,
+        },
+        headers: {
+          "X-RapidAPI-Key":
+            "7239c9fe03msh344af59194121e4p14330ajsnc7a5bf2c2824",
+          "X-RapidAPI-Host":
+            "spoonacular-recipe-food-nutrition-v1.p.rapidapi.com",
+        },
+      }
+    )
+    .then((res) => {
+      return res.data;
+    });
+};
 
 export const getRandomRecipes = (): Promise<RecipeResponse> => {
   return axios
@@ -169,7 +211,7 @@ export const getSearchRecipe = (query: string): Promise<SearchResults> => {
       {
         params: {
           query: query,
-          number: 100,
+          number: 30,
         },
         headers: {
           "X-RapidAPI-Key":

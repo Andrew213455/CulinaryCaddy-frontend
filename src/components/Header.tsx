@@ -1,11 +1,14 @@
 import { Link, useNavigate } from "react-router-dom";
 import "./Header.css";
-import { FormEvent, useContext, useState } from "react";
+import { FormEvent, useContext, useEffect, useState } from "react";
 import AuthContext from "../context/AuthContext";
 import { signInWithGoogle, signOut } from "../firebaseConfig";
+import Joke from "../models/Joke";
+import { getRandomJoke } from "../services/recipeApiService";
 
 const Header = () => {
   const [search, setSearch] = useState("");
+
   const navigate = useNavigate();
   const { user } = useContext(AuthContext);
   const submitHandler = (e: FormEvent): void => {
@@ -13,12 +16,17 @@ const Header = () => {
     navigate(`/search?${new URLSearchParams({ search: search })}`);
     setSearch("");
   };
+
   return (
     <header className="Header">
       <div className="header-top">
         <Link to="/">
           <h1>Culinary Caddy</h1>
         </Link>
+        <button onClick={() => navigate(`/joke`)}>
+          See random joke and trivia
+        </button>
+
         {user ? (
           <button onClick={signOut}>Sign Out</button>
         ) : (

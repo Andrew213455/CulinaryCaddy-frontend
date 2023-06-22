@@ -11,6 +11,7 @@ import InfoCard from "./components/InfoCard";
 import StepByStep from "./components/StepByStep";
 import TimerList from "./components/TimerList";
 import Rundown from "./components/Rundown";
+import JokeTrivia from "./components/JokeTrivia";
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
           <Route path="/steps/rundown/:id" element={<Rundown />} />
           <Route path="/search" element={<Main />} />
           <Route path="/steps/all/:id" element={<TimerList />} />
+          <Route path="/joke" element={<JokeTrivia />} />
           <Route path="*" element={<Navigate to="/" />} />
         </Routes>
       </Router>

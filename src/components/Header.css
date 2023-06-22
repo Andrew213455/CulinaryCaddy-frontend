@@ -47,6 +47,11 @@
   padding: 10px;
 }
 
+.Header .jokes {
+  color: white;
+  margin: 0px 20px;
+}
+
 @media only screen and (min-width: 425px) {
   .Header .header-top {
     justify-content: space-between;

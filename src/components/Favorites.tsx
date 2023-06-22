@@ -12,8 +12,8 @@ interface Props {
 const Favorites = ({ singleRecipe }: Props) => {
   const { account, checkFavorite, user, setAccount } = useContext(AuthContext);
   const [isFave, setIsFave] = useState(false);
-  console.log(user);
-  console.log(account);
+  // console.log(user);
+  // console.log(account);
 
   useEffect(() => {
     setIsFave(checkFavorite(singleRecipe.id));

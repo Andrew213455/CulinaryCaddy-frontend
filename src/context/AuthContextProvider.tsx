@@ -33,13 +33,13 @@ function AuthContextProvider({ children }: { children: ReactNode }) {
     });
   }, []);
   const checkFavorite = (id: string): boolean => {
-    let fave = false;
-    account?.favorites.map((recipe) => {
-      if (recipe.id === id) {
-        fave = true;
-      }
-    });
-    return fave;
+    if (account) {
+      return account?.favorites.some((item) => {
+        return item.id === id;
+      });
+    } else {
+      return false;
+    }
   };
 
   return (
