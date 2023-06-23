@@ -1,8 +1,14 @@
 .TrendingRecipes {
-  background-color: transparent;
+  background-color: #1e1e1e;
+  background-size: auto;
   padding: 20px;
-  margin-top: 40px;
+  margin: 20px;
   border-radius: 15px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
 }
 
 .TrendingRecipes .favorite {
@@ -18,20 +24,18 @@
 }
 
 .TrendingRecipes h2 {
-  text-align: center;
   color: white;
+  width: 220px;
+  text-align: center;
 }
 
 @media only screen and (min-width: 768px) {
   .TrendingRecipes {
-    background-color: transparent;
     padding: 20px;
-    margin-top: 40px;
     border-radius: 15px;
   }
 
   .TrendingRecipes h2 {
-    text-align: center;
     color: white;
   }
 }

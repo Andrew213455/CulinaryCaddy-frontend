@@ -23,16 +23,34 @@ const Header = () => {
         <Link to="/">
           <h1>Culinary Caddy</h1>
         </Link>
-        <button onClick={() => navigate(`/joke`)}>
-          See random joke and trivia
-        </button>
-
         {user ? (
-          <button onClick={signOut}>Sign Out</button>
+          <p>welcome back! {user?.displayName}</p>
         ) : (
-          <button onClick={signInWithGoogle}>Sign In With Google</button>
+          <p>Sign in to unlock more features!</p>
         )}
       </div>
+      <div className="header-mid-container">
+        <div className="header-middle">
+          <button className="header-button" onClick={() => navigate(`/joke`)}>
+            Get a Joke
+          </button>
+          <div className="gap"></div>
+          {user ? (
+            <button className="header-button" onClick={signOut}>
+              Sign Out
+            </button>
+          ) : (
+            <button className="header-button" onClick={signInWithGoogle}>
+              Sign In
+            </button>
+          )}
+          <div className="gap"></div>
+          <button className="header-button" onClick={() => navigate(`/notes`)}>
+            Get Notes
+          </button>
+        </div>
+      </div>
+
       <div className="header-bottom">
         <form onSubmit={submitHandler}>
           <input

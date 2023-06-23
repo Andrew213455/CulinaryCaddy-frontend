@@ -18,12 +18,44 @@ const TimerCard = ({ step, index }: Props) => {
   useEffect(() => {
     setSeconds(timers[index].secondsGoneBy);
   }, [timers[index].secondsGoneBy]);
+
+  const formatTime = (second: number): string => {
+    let minutes = 0;
+    let hours = 0;
+    while (second > 59) {
+      if (second > 59) {
+        minutes++;
+        second -= 60;
+      }
+      if (minutes > 59) {
+        hours++;
+        minutes -= 60;
+      }
+    }
+    return `${hours <= 9 ? `0${hours}` : hours} : ${
+      minutes <= 9 ? `0${minutes}` : minutes
+    } : ${second <= 9 ? `0${second}` : second}`;
+  };
+
   return (
     <div className="TimerCard">
       <div className="timer-right">
-        <p>{seconds}</p>
+        <p>{formatTime(seconds)}</p>
       </div>
       <div className="timer-left">
+        {step.length?.number && (
+          <div
+            className={
+              seconds >= step.length.number * 60
+                ? "red status"
+                : seconds >= step.length.number * 60 - 60
+                ? "yellow status"
+                : seconds < step.length.number * 60 - 60
+                ? "green status"
+                : "green status"
+            }
+          ></div>
+        )}
         <button
           className="start"
           onClick={() => {

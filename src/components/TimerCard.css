@@ -9,10 +9,33 @@
 .TimerCard .timer-left {
   display: flex;
   align-items: center;
+  justify-content: center;
   justify-content: space-between;
 }
 
 .TimerCard .timer-left button {
   margin-left: 5px;
   padding: 5px;
+}
+
+.TimerCard .timer-right p {
+  font-size: 22px;
+}
+
+.TimerCard .status {
+  height: 50px;
+  width: 50px;
+  border-radius: 50%;
+}
+
+.TimerCard .green {
+  background-color: green;
+}
+
+.TimerCard .yellow {
+  background-color: yellow;
+}
+
+.TimerCard .red {
+  background-color: red;
 }

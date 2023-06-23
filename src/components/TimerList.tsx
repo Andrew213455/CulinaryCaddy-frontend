@@ -26,15 +26,20 @@ const TimerList = () => {
     });
   }, [id]);
   return (
-    <div>
-      <button onClick={() => navigate(`/steps/${id}`)}>back to steps</button>
-      {steps
-        .filter((item) => {
-          return item.length !== undefined;
-        })
-        .map((step, index) => {
-          return <StepCard step={step} index={index} key={index} />;
-        })}
+    <div className="Timer">
+      <div className="title">
+        <h2>All Timers</h2>
+        <button onClick={() => navigate(`/steps/${id}`)}>back to steps</button>
+      </div>
+      <div className="steps-container">
+        {steps
+          .filter((item) => {
+            return item.length !== undefined;
+          })
+          .map((step, index) => {
+            return <StepCard step={step} index={index} key={index} />;
+          })}
+      </div>
     </div>
   );
 };

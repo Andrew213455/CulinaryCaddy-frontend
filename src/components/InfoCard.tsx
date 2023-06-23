@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react";
+import { FormEvent, useContext, useEffect, useState } from "react";
 import "./InfoCard.css";
 import NutritionFacts, { NutrientObjects } from "../models/NutritionFacts";
 import {
@@ -18,10 +18,12 @@ import Equipment from "../models/Equipment";
 import AuthContext from "../context/AuthContext";
 import {
   addFavorite,
+  addNote,
   deleteFavorite,
   getAccountById,
 } from "../services/accountApiService";
 import Recipe from "../models/Recipe";
+import Notes from "../models/Notes";
 const InfoCard = () => {
   const [isFave, setIsFave] = useState(false);
   const [nutritionInfo, setNutritionInfo] = useState<NutritionFacts>({
@@ -39,9 +41,10 @@ const InfoCard = () => {
     equipment: [{ name: "" }],
   });
   const [recipe, setRecipe] = useState<Recipe | null>(null);
+  const [note, setNote] = useState("");
+
   const navigate = useNavigate();
   const id: string = useParams().id!;
-
   const { setCurrentRecipeId, currentRecipeId } =
     useContext(CurrentRecipeContext);
   const { addTimers } = useContext(TimerContext);
@@ -102,10 +105,44 @@ const InfoCard = () => {
     }
   );
 
+  const submitListener = (e: FormEvent) => {
+    e.preventDefault();
+    addNote(account?.googleId!, {
+      recipeId: recipe?.id!,
+      note: note,
+      title: recipe?.title!,
+    }).then((res) => {
+      setAccount(res);
+    });
+  };
+
+  const filteredNote = account?.note.forEach((singleNote) => {
+    if (singleNote.recipeId === id) {
+      return singleNote;
+    }
+  });
+
   console.log(account);
 
   return (
     <section className="InfoCard">
+      {account && (
+        <div className="note-div">
+          <h2>Notes</h2>
+          <form onSubmit={submitListener}>
+            <textarea
+              className="add-note"
+              name="notes"
+              id="notes"
+              placeholder="add a note!"
+              value={note}
+              onChange={(e) => setNote(e.target.value)}
+            ></textarea>
+            <button>Add Note</button>
+          </form>
+          {filteredNote !== undefined && <div>{filteredNote}</div>}
+        </div>
+      )}
       <div className="step-by-step">
         <div className="picture-div">
           <h2>Get your recipe step-by-step</h2>
@@ -116,34 +153,37 @@ const InfoCard = () => {
           <button onClick={() => navigate(`/steps/rundown/${id}`)}>
             All Steps
           </button>
-          {account && (
-            <div className="heart-container">
-              {!isFave ? (
-                <i
-                  className="fa-regular fa-heart heart"
-                  onClick={() =>
-                    addFavorite(account?.googleId!, recipe!).then(() => {
-                      getAccountById(account.googleId).then((res) => {
-                        setAccount(res);
-                      });
-                    })
-                  }
-                ></i>
-              ) : (
-                <i
-                  className="fa-solid fa-heart heart"
-                  onClick={() =>
-                    deleteFavorite(account?.googleId!, recipe!).then(() => {
-                      console.log(account, recipe);
-                      getAccountById(account.googleId).then((res) => {
-                        setAccount(res);
-                      });
-                    })
-                  }
-                ></i>
-              )}
-            </div>
-          )}
+          <div>
+            {account && (
+              <div className="heart-container">
+                {!isFave ? (
+                  <i
+                    className="fa-regular fa-heart heart"
+                    onClick={() =>
+                      addFavorite(account?.googleId!, recipe!).then(() => {
+                        getAccountById(account.googleId).then((res) => {
+                          setAccount(res);
+                        });
+                      })
+                    }
+                  ></i>
+                ) : (
+                  <i
+                    className="fa-solid fa-heart heart"
+                    onClick={() =>
+                      deleteFavorite(account?.googleId!, recipe!).then(() => {
+                        console.log(account, recipe);
+                        getAccountById(account.googleId).then((res) => {
+                          setAccount(res);
+                        });
+                      })
+                    }
+                  ></i>
+                )}
+              </div>
+            )}
+          </div>
+
           <button onClick={() => navigate(`/steps/${id}`)}>Step by Step</button>
         </div>
       </div>

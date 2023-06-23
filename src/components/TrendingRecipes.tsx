@@ -34,7 +34,7 @@ const TrendingRecipes = ({ query }: Props) => {
 
   return (
     <section className="TrendingRecipes">
-      {user && <h2>Favorite Recipes</h2>}
+      {user && <h2>{user.displayName}'s Favorite Recipes</h2>}
       <div className="favorite">
         {user &&
           account?.favorites!.map((recipe) => {

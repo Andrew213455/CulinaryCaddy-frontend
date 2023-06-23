@@ -1,30 +1,75 @@
 .Header {
-  width: 100%;
-  background-color: #1e1e1e;
-  border-radius: 15px;
+  width: 100vw;
   display: flex;
   flex-direction: column;
   align-items: center;
+  background-color: #1e1e1e;
 }
 
 .Header .header-top {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: 95%;
+  width: 90%;
   padding: 0px 20px;
+  color: white;
+}
+
+.Header .header-top p {
+  display: flex;
+}
+
+.Header .header-mid-container {
+  width: 90%;
+  display: flex;
+  justify-content: flex-start;
+}
+
+.Header .header-middle {
+  display: flex;
+  background-image: url(../images/retrowavyblah.jpg);
+  flex-direction: row;
+  width: fit-content;
+  justify-content: flex-start;
+  height: 50px;
+}
+
+.Header .gap {
+  height: 100%;
+  width: 5px;
+  background-color: #1e1e1e;
+  z-index: 10;
+}
+
+.Header .header-button {
+  background-color: #1e1e1e;
+  height: 45px;
+  width: 100px;
+  color: white;
+  border: none;
+  border-bottom: 5px solid transparent;
+  box-sizing: border-box;
+  font-weight: bold;
+  font-size: 18px;
+  border-radius: 0;
+}
+
+.Header .header-button:hover {
+  background-color: transparent;
+  transition: 0.5s;
 }
 
 .Header .header-bottom {
   display: flex;
   align-items: center;
-  width: 95%;
+  width: 90%;
   padding: 20px 20px;
 }
 
 .Header h1 {
   font-size: 1.5em;
   color: white;
+  width: 175px;
 }
 
 .Header #search {
@@ -53,18 +98,22 @@
 }
 
 @media only screen and (min-width: 425px) {
-  .Header .header-top {
-    justify-content: space-between;
-  }
-  .Header h1 {
-    font-size: 2em;
-  }
-
   .Header .login {
     padding: 10px 25px;
   }
 
   .Header .search {
     width: 75px;
+  }
+}
+
+@media only screen and (min-width: 768px) {
+  .Header .button-container {
+    display: flex;
+    flex-direction: row;
+  }
+
+  .Header .button-container button {
+    width: 50px;
   }
 }

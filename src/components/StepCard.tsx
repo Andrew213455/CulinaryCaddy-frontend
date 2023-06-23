@@ -1,6 +1,12 @@
+import { useEffect, useState } from "react";
 import Directions, { Step } from "../models/Directions";
 import "./StepCard.css";
 import TimerCard from "./TimerCard";
+import {
+  getIngredientsById,
+  getRecipeSteps,
+} from "../services/recipeApiService";
+import { useParams } from "react-router-dom";
 
 interface Props {
   index: number;
@@ -16,9 +22,10 @@ const StepCard = ({ index, step }: Props) => {
         <h2>Step {step.number}</h2>
         <p>step: {step.step}</p>
       </div>
+      <div className="ingredients">{step.ingredients.name}</div>
       <div className="timer-container">
         {step.length && (
-          <div>
+          <div className="timer">
             <TimerCard step={step} index={index} />
           </div>
         )}

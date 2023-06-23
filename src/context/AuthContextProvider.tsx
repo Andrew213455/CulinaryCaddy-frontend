@@ -22,6 +22,7 @@ function AuthContextProvider({ children }: { children: ReactNode }) {
               googleId: newUser?.uid!,
               name: newUser?.displayName!,
               favorites: [],
+              note: [],
               photoURL: newUser?.photoURL!,
             };
             addAccount(newAccount).then((res) => {

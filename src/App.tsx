@@ -12,6 +12,7 @@ import StepByStep from "./components/StepByStep";
 import TimerList from "./components/TimerList";
 import Rundown from "./components/Rundown";
 import JokeTrivia from "./components/JokeTrivia";
+import Notes from "./components/Notes";
 
 function App() {
   return (
@@ -26,6 +27,7 @@ function App() {
           <Route path="/search" element={<Main />} />
           <Route path="/steps/all/:id" element={<TimerList />} />
           <Route path="/joke" element={<JokeTrivia />} />
+          <Route path="/notes" element={<Notes />} />
           <Route path="*" element={<Navigate to="/" />} />
         </Routes>
       </Router>

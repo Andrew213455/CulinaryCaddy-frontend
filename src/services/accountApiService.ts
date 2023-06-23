@@ -1,6 +1,7 @@
 import axios from "axios";
 import Account from "../models/Account";
 import Recipe from "../models/Recipe";
+import Notes from "../models/Notes";
 
 const baseURL = process.env.REACT_APP_API_URL || "";
 
@@ -33,6 +34,10 @@ export const deleteFavorite = (
   return axios
     .patch(`${baseURL}/fave/delete/${id}`, recipe)
     .then((res) => res.data);
+};
+
+export const addNote = (id: string, note: Notes): Promise<Account> => {
+  return axios.patch(`${baseURL}/add/${id}`, note).then((res) => res.data);
 };
 
 export const updateAccount = (
