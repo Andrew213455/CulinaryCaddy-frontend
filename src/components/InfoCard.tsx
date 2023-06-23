@@ -18,12 +18,12 @@ import Equipment from "../models/Equipment";
 import AuthContext from "../context/AuthContext";
 import {
   addFavorite,
-  addNote,
   deleteFavorite,
   getAccountById,
 } from "../services/accountApiService";
 import Recipe from "../models/Recipe";
-import Notes from "../models/Notes";
+import { addNote } from "../services/noteApiService";
+
 const InfoCard = () => {
   const [isFave, setIsFave] = useState(false);
   const [nutritionInfo, setNutritionInfo] = useState<NutritionFacts>({
@@ -107,26 +107,27 @@ const InfoCard = () => {
 
   const submitListener = (e: FormEvent) => {
     e.preventDefault();
-    addNote(account?.googleId!, {
+    addNote({
+      accountId: account?._id!,
       recipeId: recipe?.id!,
       note: note,
       title: recipe?.title!,
     }).then((res) => {
-      setAccount(res);
+      console.log(res);
     });
   };
 
-  const filteredNote = account?.note.forEach((singleNote) => {
-    if (singleNote.recipeId === id) {
-      return singleNote;
-    }
-  });
-
   console.log(account);
+
+  // const filteredNote = account?.note.filter((singleNote) => {
+  //   if (singleNote.recipeId === id) {
+  //     return singleNote.note;
+  //   }
+  // });
 
   return (
     <section className="InfoCard">
-      {account && (
+      {account && checkFavorite(recipe?.id!) && recipe && (
         <div className="note-div">
           <h2>Notes</h2>
           <form onSubmit={submitListener}>
@@ -140,7 +141,15 @@ const InfoCard = () => {
             ></textarea>
             <button>Add Note</button>
           </form>
-          {filteredNote !== undefined && <div>{filteredNote}</div>}
+          {/* {filteredNote !== undefined ? (
+            <div>
+              {filteredNote.map((note) => {
+                return <p>{note.note}</p>;
+              })}
+            </div>
+          ) : (
+            <div>Add note</div>
+          )} */}
         </div>
       )}
       <div className="step-by-step">
@@ -159,13 +168,13 @@ const InfoCard = () => {
                 {!isFave ? (
                   <i
                     className="fa-regular fa-heart heart"
-                    onClick={() =>
+                    onClick={() => {
                       addFavorite(account?.googleId!, recipe!).then(() => {
                         getAccountById(account.googleId).then((res) => {
                           setAccount(res);
                         });
-                      })
-                    }
+                      });
+                    }}
                   ></i>
                 ) : (
                   <i
