@@ -1,10 +1,8 @@
 import { Link, useNavigate } from "react-router-dom";
 import "./Header.css";
-import { FormEvent, useContext, useEffect, useState } from "react";
+import { FormEvent, useContext, useState } from "react";
 import AuthContext from "../context/AuthContext";
 import { signInWithGoogle, signOut } from "../firebaseConfig";
-import Joke from "../models/Joke";
-import { getRandomJoke } from "../services/recipeApiService";
 
 const Header = () => {
   const [search, setSearch] = useState("");
@@ -29,7 +27,7 @@ const Header = () => {
           <p>Sign in to unlock more features!</p>
         )}
       </div>
-      <div className="header-mid-container">
+      <nav className="header-mid-container">
         <div className="header-middle">
           <button className="header-button" onClick={() => navigate(`/joke`)}>
             Get a Joke
@@ -49,8 +47,7 @@ const Header = () => {
             Get Notes
           </button>
         </div>
-      </div>
-
+      </nav>
       <div className="header-bottom">
         <form onSubmit={submitHandler}>
           <input

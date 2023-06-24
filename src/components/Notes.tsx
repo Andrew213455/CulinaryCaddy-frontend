@@ -1,7 +1,7 @@
 import "./Notes.css";
 
 const Notes = () => {
-  return <div className="Notes"></div>;
+  return <section className="Notes"></section>;
 };
 
 export default Notes;

@@ -20,7 +20,7 @@ const Favorites = ({ singleRecipe }: Props) => {
   }, [account]);
 
   return (
-    <div className="Favorites">
+    <section className="Favorites">
       <div className="Favorites-container">
         <div className="image-container">
           <Link to={`/${singleRecipe.id}`}>
@@ -59,7 +59,7 @@ const Favorites = ({ singleRecipe }: Props) => {
           </div>
         </div>
       </div>
-    </div>
+    </section>
   );
 };
 

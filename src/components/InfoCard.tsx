@@ -105,28 +105,28 @@ const InfoCard = () => {
     }
   );
 
-  const submitListener = (e: FormEvent) => {
-    e.preventDefault();
-    addNote(account?.googleId!, {
-      recipeId: recipe?.id!,
-      note: note,
-      title: recipe?.title!,
-    }).then((res) => {
-      setAccount(res);
-    });
-  };
+  // const submitListener = (e: FormEvent) => {
+  //   e.preventDefault();
+  //   addNote(account?.googleId!, {
+  //     recipeId: recipe?.id!,
+  //     note: note,
+  //     title: recipe?.title!,
+  //   }).then((res) => {
+  //     setAccount(res);
+  //   });
+  // };
 
-  const filteredNote = account?.note.forEach((singleNote) => {
-    if (singleNote.recipeId === id) {
-      return singleNote;
-    }
-  });
+  // const filteredNote = account?.note.forEach((singleNote) => {
+  //   if (singleNote.recipeId === id) {
+  //     return singleNote;
+  //   }
+  // });
 
   console.log(account);
 
   return (
     <section className="InfoCard">
-      {account && (
+      {/* {account && (
         <div className="note-div">
           <h2>Notes</h2>
           <form onSubmit={submitListener}>
@@ -142,7 +142,7 @@ const InfoCard = () => {
           </form>
           {filteredNote !== undefined && <div>{filteredNote}</div>}
         </div>
-      )}
+      )} */}
       <div className="step-by-step">
         <div className="picture-div">
           <h2>Get your recipe step-by-step</h2>

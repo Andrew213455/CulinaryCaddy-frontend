@@ -16,7 +16,7 @@ const JokeTrivia = () => {
   }, []);
 
   return (
-    <div className="jokeTriviaContainer">
+    <section className="jokeTriviaContainer">
       <div className="JokeTrivia">
         <button
           onClick={() => {
@@ -39,7 +39,7 @@ const JokeTrivia = () => {
           {trivia.text}
         </div>
       </div>
-    </div>
+    </section>
   );
 };
 

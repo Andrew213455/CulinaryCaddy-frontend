@@ -39,12 +39,3 @@ export const deleteFavorite = (
 export const addNote = (id: string, note: Notes): Promise<Account> => {
   return axios.patch(`${baseURL}/add/${id}`, note).then((res) => res.data);
 };
-
-export const updateAccount = (
-  id: string,
-  updatedAccount: Account
-): Promise<Account> => {
-  return axios
-    .put(`${baseURL}.accounts/${id}`, updatedAccount)
-    .then((res) => res.data);
-};

@@ -15,7 +15,7 @@ const Rundown = () => {
   });
 
   return (
-    <div className="Rundown">
+    <section className="Rundown">
       <h3>Full Recipe</h3>
       {recipe.map((item) => {
         return (
@@ -25,7 +25,7 @@ const Rundown = () => {
         );
       })}
       <button onClick={() => navigate(`/${id}`)}>Back to Info Page</button>
-    </div>
+    </section>
   );
 };
 

@@ -38,7 +38,7 @@ const TimerCard = ({ step, index }: Props) => {
   };
 
   return (
-    <div className="TimerCard">
+    <section className="TimerCard">
       <div className="timer-right">
         <p>{formatTime(seconds)}</p>
       </div>
@@ -69,7 +69,7 @@ const TimerCard = ({ step, index }: Props) => {
         <button onClick={() => resetTimer(index)}>Reset Timer</button>
         <button onClick={() => pauseTimer(index)}>pause timer</button>
       </div>
-    </div>
+    </section>
   );
 };
 export default TimerCard;

@@ -17,7 +17,7 @@ const StepCard = ({ index, step }: Props) => {
   // const [theIndex, setTheIndex] = useState<Directions[]>([0])
   console.log(step);
   return (
-    <div className="StepCard">
+    <section className="StepCard">
       <div className="Step-container">
         <h2>Step {step.number}</h2>
         <p>step: {step.step}</p>
@@ -30,7 +30,7 @@ const StepCard = ({ index, step }: Props) => {
           </div>
         )}
       </div>
-    </div>
+    </section>
   );
 };
 

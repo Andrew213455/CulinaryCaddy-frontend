@@ -12,9 +12,9 @@ const Main = () => {
   console.log(query);
 
   return (
-    <div className="Main">
+    <main className="Main">
       <TrendingRecipes query={query} />
-    </div>
+    </main>
   );
 };
 
