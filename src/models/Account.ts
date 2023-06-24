@@ -1,4 +1,3 @@
-import Notes from "./Notes";
 import Recipe from "./Recipe";
 
 export default interface Account {
@@ -6,6 +5,5 @@ export default interface Account {
   googleId: string;
   name: string;
   favorites: Recipe[];
-  note: Notes[];
   photoURL: string;
 }
