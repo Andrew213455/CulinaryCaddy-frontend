@@ -13,3 +13,11 @@
 .StepCard .Step-container {
   width: 100%;
 }
+
+.StepCard .ingredients {
+  display: flex;
+}
+
+.StepCard .ingredients p {
+  margin-right: 10px;
+}

@@ -6,10 +6,11 @@ import {
   getSearchRecipe,
 } from "../services/recipeApiService";
 import RecipeCard from "./RecipeCard";
-import Directions from "../models/Directions";
+
 import Favorites from "./Favorites";
 import AuthContext from "../context/AuthContext";
-import { addFavorite } from "../services/accountApiService";
+
+import { useParams } from "react-router-dom";
 
 interface Props {
   query: string | null;
@@ -18,7 +19,6 @@ interface Props {
 const TrendingRecipes = ({ query }: Props) => {
   const [recipes, setRecipes] = useState<Recipe[]>([]);
   const { user, account } = useContext(AuthContext);
-
   useEffect(() => {
     {
       query
@@ -32,16 +32,26 @@ const TrendingRecipes = ({ query }: Props) => {
     }
   }, [query]);
 
+  console.log(query);
   return (
     <section className="TrendingRecipes">
-      {user && <h2>{user.displayName}'s Favorite Recipes</h2>}
-      <div className="favorite">
-        {user &&
-          account?.favorites!.map((recipe) => {
-            return <Favorites key={recipe.id} singleRecipe={recipe} />;
-          })}
-      </div>
-      <h2>Trending Recipes</h2>
+      {query === null && (
+        <div className="favorite-container">
+          {user && <h2>{user.displayName}'s Favorite Recipes</h2>}
+          <div className="favorite">
+            {user &&
+              account?.favorites!.map((recipe) => {
+                return <Favorites key={recipe.id} singleRecipe={recipe} />;
+              })}
+          </div>
+        </div>
+      )}
+
+      {query === null ? (
+        <h2>Trending Recipes</h2>
+      ) : (
+        <h2>Search results: {query}</h2>
+      )}
       <div className="trending-recipe-array">
         {recipes.map((recipe) => {
           return (

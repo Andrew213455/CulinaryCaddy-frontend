@@ -12,10 +12,14 @@ export const getNoteById = (
     .then((res) => res.data);
 };
 
+export const getAllNotes = (accountId: string): Promise<Note[]> => {
+  return axios.get(`${baseURL}/notes/${accountId}`).then((res) => res.data);
+};
+
 export const addNote = (note: Note): Promise<Note> => {
   return axios.post(`${baseURL}/notes`, note).then((res) => res.data);
 };
 
-export const deleteNote = (id: string): Promise<void> => {
-  return axios.delete(`${baseURL}/notes/${id}`).then((res) => res.data);
+export const deleteNote = (_id: string): Promise<void> => {
+  return axios.delete(`${baseURL}/notes/${_id}`).then((res) => res.data);
 };

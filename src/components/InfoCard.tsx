@@ -22,7 +22,8 @@ import {
   getAccountById,
 } from "../services/accountApiService";
 import Recipe from "../models/Recipe";
-import { addNote } from "../services/noteApiService";
+import { addNote, deleteNote, getNoteById } from "../services/noteApiService";
+import Note from "../models/Note";
 
 const InfoCard = () => {
   const [isFave, setIsFave] = useState(false);
@@ -42,6 +43,8 @@ const InfoCard = () => {
   });
   const [recipe, setRecipe] = useState<Recipe | null>(null);
   const [note, setNote] = useState("");
+  const [allNotes, setAllNotes] = useState<Note[]>([]);
+  const [trigger, setTrigger] = useState(false);
 
   const navigate = useNavigate();
   const id: string = useParams().id!;
@@ -85,6 +88,13 @@ const InfoCard = () => {
     }
   }, [account, recipe]);
 
+  useEffect(() => {
+    getNoteById(account?._id!, recipe?.id!).then((res) => {
+      setAllNotes(res);
+      console.log(res);
+    });
+  }, [trigger, recipe]);
+
   const nutritionArray: NutrientObjects[] = nutritionInfo.nutrients.filter(
     (nutrient) => {
       if (
@@ -107,17 +117,21 @@ const InfoCard = () => {
 
   const submitListener = (e: FormEvent) => {
     e.preventDefault();
+    let rid = recipe?.id!;
     addNote({
       accountId: account?._id!,
-      recipeId: recipe?.id!,
+      recipeId: rid.toString(),
       note: note,
       title: recipe?.title!,
-    }).then((res) => {
-      console.log(res);
+    }).then(() => {
+      getNoteById(account?._id!, recipe?.id!).then((res) => {
+        setAllNotes(res);
+        console.log(res);
+      });
     });
+    setTrigger((prev) => !prev);
+    setNote("");
   };
-
-  console.log(account);
 
   // const filteredNote = account?.note.filter((singleNote) => {
   //   if (singleNote.recipeId === id) {
@@ -141,6 +155,26 @@ const InfoCard = () => {
             ></textarea>
             <button>Add Note</button>
           </form>
+          <div className="notes-display">
+            {allNotes.map((item, index) => {
+              return (
+                <div>
+                  <p>
+                    note {index + 1}:{item.note}
+                  </p>
+                  <i
+                    className="fa-solid fa-trash"
+                    onClick={() => {
+                      deleteNote(item._id!).then((res) => {
+                        setTrigger((prev) => !prev);
+                        return res;
+                      });
+                    }}
+                  ></i>
+                </div>
+              );
+            })}
+          </div>
           {/* {filteredNote !== undefined ? (
             <div>
               {filteredNote.map((note) => {
@@ -151,7 +185,7 @@ const InfoCard = () => {
             <div>Add note</div>
           )} */}
         </div>
-      )} */}
+      )}
       <div className="step-by-step">
         <div className="picture-div">
           <h2>Get your recipe step-by-step</h2>

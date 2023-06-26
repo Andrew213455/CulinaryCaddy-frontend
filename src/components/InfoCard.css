@@ -18,6 +18,10 @@
   flex-direction: column;
 }
 
+.InfoCard .heart-container {
+  font-size: 30px;
+}
+
 .InfoCard .note-div {
   width: 95%;
   display: flex;

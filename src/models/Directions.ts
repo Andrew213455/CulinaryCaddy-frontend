@@ -12,7 +12,7 @@ export interface Step {
   step: string;
   number: number;
   length?: Length;
-  ingredients: SingleIngredient;
+  ingredients: SingleIngredient[];
 }
 
 export default interface Directions {

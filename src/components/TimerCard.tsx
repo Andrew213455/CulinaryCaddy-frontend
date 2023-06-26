@@ -16,8 +16,8 @@ const TimerCard = ({ step, index }: Props) => {
   const navigate = useNavigate();
   const id: string = useParams().id!;
   useEffect(() => {
-    setSeconds(timers[index].secondsGoneBy);
-  }, [timers[index].secondsGoneBy]);
+    setSeconds(timers[index]?.secondsGoneBy);
+  }, [timers[index]?.secondsGoneBy]);
 
   const formatTime = (second: number): string => {
     let minutes = 0;

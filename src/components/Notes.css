@@ -1,0 +1,10 @@
+.Notes {
+  background-color: #1e1e1e;
+  color: white;
+}
+
+.Notes .note-card {
+  background-color: grey;
+  height: fit-content;
+  width: 95%;
+}
