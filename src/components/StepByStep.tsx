@@ -1,19 +1,21 @@
 import { useContext, useEffect, useState } from "react";
 import "./StepByStep.css";
 import { useNavigate, useParams } from "react-router-dom";
-import { getRecipeSteps } from "../services/recipeApiService";
+import { getRecipeById, getRecipeSteps } from "../services/recipeApiService";
 import { Step } from "../models/Directions";
 import StepCard from "./StepCard";
 import TimerContext from "../context/TimerContext";
 import CurrentRecipeContext from "../context/CurrentRecipeContext";
 import { addRating } from "../services/ratingApiService";
 import AuthContext from "../context/AuthContext";
+import Recipe from "../models/Recipe";
 
 const StepByStep = () => {
   const [steps, setSteps] = useState<Step[]>([]);
   const [currentStep, setCurrentStep] = useState<number>(0);
   const [clicked, setClicked] = useState([false, false, false, false, false]);
   const [rating, setRating] = useState<number>(0);
+  const [singleRecipe, setSingleRecipe] = useState<Recipe | null>(null);
 
   const navigate = useNavigate();
   const id: string = useParams().id!;
@@ -30,6 +32,9 @@ const StepByStep = () => {
         addTimers(id);
       }
     });
+    getRecipeById(id).then((res) => {
+      setSingleRecipe(res);
+    });
   }, [id]);
 
   const ratingFunction = () => {
@@ -45,93 +50,102 @@ const StepByStep = () => {
         <div className="directions-container">
           {steps.length === currentStep && (
             <div className="rating">
-              <h2>Leave a rating</h2>
-              {clicked[0] !== true ? (
-                <i
-                  className="fa-regular fa-star"
-                  onClick={() => {
-                    setClicked([true, false, false, false, false]);
-                    setRating(1);
-                  }}
-                ></i>
-              ) : (
-                <i
-                  className="fa-solid fa-star"
-                  onClick={() => {
-                    setClicked([true, false, false, false, false]);
-                    setRating(1);
-                  }}
-                ></i>
-              )}
-              {clicked[1] !== true ? (
-                <i
-                  className="fa-regular fa-star"
-                  onClick={() => {
-                    setClicked([true, true, false, false, false]);
-                    setRating(2);
-                  }}
-                ></i>
-              ) : (
-                <i
-                  className="fa-solid fa-star"
-                  onClick={() => {
-                    setClicked([true, true, false, false, false]);
-                    setRating(2);
-                  }}
-                ></i>
-              )}
-              {clicked[2] !== true ? (
-                <i
-                  className="fa-regular fa-star"
-                  onClick={() => {
-                    setClicked([true, true, true, false, false]);
-                    setRating(3);
-                  }}
-                ></i>
-              ) : (
-                <i
-                  className="fa-solid fa-star"
-                  onClick={() => {
-                    setClicked([true, true, true, false, false]);
-                    setRating(3);
-                  }}
-                ></i>
-              )}
-              {clicked[3] !== true ? (
-                <i
-                  className="fa-regular fa-star"
-                  onClick={() => {
-                    setClicked([true, true, true, true, false]);
-                    setRating(4);
-                  }}
-                ></i>
-              ) : (
-                <i
-                  className="fa-solid fa-star"
-                  onClick={() => {
-                    setClicked([true, true, true, true, false]);
-                    setRating(4);
-                  }}
-                ></i>
-              )}
-              {clicked[4] !== true ? (
-                <i
-                  className="fa-regular fa-star"
-                  onClick={() => {
-                    setClicked([true, true, true, true, true]);
-                    setRating(5);
-                  }}
-                ></i>
-              ) : (
-                <i
-                  className="fa-solid fa-star"
-                  onClick={() => {
-                    setClicked([true, true, true, true, true]);
-                    setRating(5);
-                  }}
-                ></i>
-              )}
-              <button onClick={ratingFunction}>Add Rating</button>
+              <div className="rating-left">
+                {steps.length === currentStep && <h2>Leave a rating</h2>}
+                <div className="star-container">
+                  {clicked[0] !== true ? (
+                    <i
+                      className="fa-regular fa-star star"
+                      onClick={() => {
+                        setClicked([true, false, false, false, false]);
+                        setRating(1);
+                      }}
+                    ></i>
+                  ) : (
+                    <i
+                      className="fa-solid fa-star star"
+                      onClick={() => {
+                        setClicked([true, false, false, false, false]);
+                        setRating(1);
+                      }}
+                    ></i>
+                  )}
+                  {clicked[1] !== true ? (
+                    <i
+                      className="fa-regular fa-star star"
+                      onClick={() => {
+                        setClicked([true, true, false, false, false]);
+                        setRating(2);
+                      }}
+                    ></i>
+                  ) : (
+                    <i
+                      className="fa-solid fa-star star"
+                      onClick={() => {
+                        setClicked([true, true, false, false, false]);
+                        setRating(2);
+                      }}
+                    ></i>
+                  )}
+                  {clicked[2] !== true ? (
+                    <i
+                      className="fa-regular fa-star star"
+                      onClick={() => {
+                        setClicked([true, true, true, false, false]);
+                        setRating(3);
+                      }}
+                    ></i>
+                  ) : (
+                    <i
+                      className="fa-solid fa-star star"
+                      onClick={() => {
+                        setClicked([true, true, true, false, false]);
+                        setRating(3);
+                      }}
+                    ></i>
+                  )}
+                  {clicked[3] !== true ? (
+                    <i
+                      className="fa-regular fa-star star"
+                      onClick={() => {
+                        setClicked([true, true, true, true, false]);
+                        setRating(4);
+                      }}
+                    ></i>
+                  ) : (
+                    <i
+                      className="fa-solid fa-star star"
+                      onClick={() => {
+                        setClicked([true, true, true, true, false]);
+                        setRating(4);
+                      }}
+                    ></i>
+                  )}
+                  {clicked[4] !== true ? (
+                    <i
+                      className="fa-regular fa-star star"
+                      onClick={() => {
+                        setClicked([true, true, true, true, true]);
+                        setRating(5);
+                      }}
+                    ></i>
+                  ) : (
+                    <i
+                      className="fa-solid fa-star star"
+                      onClick={() => {
+                        setClicked([true, true, true, true, true]);
+                        setRating(5);
+                      }}
+                    ></i>
+                  )}
+                </div>
+                <button className="rate-button" onClick={ratingFunction}>
+                  Add Rating
+                </button>
+              </div>
+              <div className="rating-right last-image">
+                <img src={singleRecipe?.image} alt="food" />
+              </div>
             </div>
           )}
           {steps.map((step, index) => {

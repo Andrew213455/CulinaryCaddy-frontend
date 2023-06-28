@@ -158,12 +158,9 @@ const InfoCard = () => {
           <div className="notes-display">
             {allNotes.map((item, index) => {
               return (
-                <div>
-                  <p>
-                    note {index + 1}:{item.note}
-                  </p>
+                <div className="trash-box">
                   <i
-                    className="fa-solid fa-trash"
+                    className="fa-solid fa-trash trash"
                     onClick={() => {
                       deleteNote(item._id!).then((res) => {
                         setTrigger((prev) => !prev);
@@ -171,6 +168,9 @@ const InfoCard = () => {
                       });
                     }}
                   ></i>
+                  <p className="note-p">
+                    note {index + 1}: {item.note}
+                  </p>
                 </div>
               );
             })}

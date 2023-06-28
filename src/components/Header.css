@@ -1,13 +1,15 @@
 .Header {
-  width: 100vw;
+  width: 101%;
   display: flex;
   flex-direction: column;
   align-items: center;
   background-color: #1e1e1e;
+  border-bottom: 2px solid white;
 }
 
 .Header .header-top {
   display: flex;
+  flex-direction: column;
   justify-content: space-between;
   align-items: center;
   width: 90%;
@@ -16,13 +18,11 @@
 }
 
 .Header .header-top p {
-  display: flex;
+  display: none;
 }
 
 .Header .header-mid-container {
-  width: 90%;
   display: flex;
-  justify-content: flex-start;
 }
 
 .Header .header-middle {
@@ -30,8 +30,8 @@
   background-image: url(../images/retrowavyblah.jpg);
   flex-direction: row;
   width: fit-content;
-  justify-content: flex-start;
-  height: 50px;
+  justify-content: flex-end;
+  height: 40px;
 }
 
 .Header .gap {
@@ -43,14 +43,14 @@
 
 .Header .header-button {
   background-color: #1e1e1e;
-  height: 45px;
-  width: 100px;
+  height: 35px;
+  width: 70px;
   color: white;
   border: none;
   border-bottom: 5px solid transparent;
   box-sizing: border-box;
   font-weight: bold;
-  font-size: 18px;
+  font-size: 14px;
   border-radius: 0;
 }
 
@@ -97,6 +97,10 @@
   margin: 0px 20px;
 }
 
+.Header .welcome {
+  color: white;
+}
+
 @media only screen and (min-width: 425px) {
   .Header .login {
     padding: 10px 25px;
@@ -115,5 +119,47 @@
 
   .Header .button-container button {
     width: 50px;
+  }
+
+  .Header .header-top {
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+  .Header .header-top p {
+    display: flex;
+  }
+
+  .Header .header-mid-container {
+    justify-content: flex-end;
+  }
+
+  .Header .header-middle {
+    display: flex;
+    background-image: url(../images/retrowavyblah.jpg);
+    flex-direction: row;
+    width: fit-content;
+    justify-content: center;
+    height: 50px;
+  }
+
+  .Header .gap {
+    height: 100%;
+    width: 5px;
+    background-color: #1e1e1e;
+    z-index: 10;
+  }
+
+  .Header .header-button {
+    background-color: #1e1e1e;
+    height: 45px;
+    width: 100px;
+    color: white;
+    border: none;
+    border-bottom: 5px solid transparent;
+    box-sizing: border-box;
+    font-weight: bold;
+    font-size: 18px;
+    border-radius: 0;
   }
 }

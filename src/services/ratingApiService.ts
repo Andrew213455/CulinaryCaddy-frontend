@@ -1,9 +1,14 @@
 import axios from "axios";
 import Rating from "../models/Rating";
+import Average from "../models/Average";
 
 const baseURL = process.env.REACT_APP_API_URL || "";
 
-export const getAllRatings = (recipeId: string): Promise<Rating[]> => {
+export const getAverageRating = (recipeId: string): Promise<Average[]> => {
+  return axios.get(`${baseURL}/avgRating/${recipeId}`).then((res) => res.data);
+};
+
+export const getRatingsByRecipe = (recipeId: string): Promise<Rating[]> => {
   return axios.get(`${baseURL}/rating/${recipeId}`).then((res) => res.data);
 };
 

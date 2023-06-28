@@ -10,15 +10,13 @@ import RecipeCard from "./RecipeCard";
 import Favorites from "./Favorites";
 import AuthContext from "../context/AuthContext";
 
-import { useParams } from "react-router-dom";
-
 interface Props {
   query: string | null;
 }
 
 const TrendingRecipes = ({ query }: Props) => {
   const [recipes, setRecipes] = useState<Recipe[]>([]);
-  const { user, account } = useContext(AuthContext);
+  const { user, account, hideFavorite } = useContext(AuthContext);
   useEffect(() => {
     {
       query
@@ -35,7 +33,7 @@ const TrendingRecipes = ({ query }: Props) => {
   console.log(query);
   return (
     <section className="TrendingRecipes">
-      {query === null && (
+      {query === null && hideFavorite === false && (
         <div className="favorite-container">
           {user && <h2>{user.displayName}'s Favorite Recipes</h2>}
           <div className="favorite">

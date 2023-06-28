@@ -1,10 +1,51 @@
 .Notes {
-  background-color: #1e1e1e;
   color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  margin: 20px 0px;
+}
+
+.Notes .notes-container {
+  background-color: black;
+  height: fit-content;
+  width: 90%;
+  padding: 20px;
+}
+
+.Notes .note-card-box {
+  border-top: 2px solid white;
+  border-bottom: 2px solid white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 20px 0px;
+}
+
+.Notes .title {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  align-items: center;
+}
+
+.Notes .note-card-box p {
+  width: 90%;
+  word-break: break-all;
 }
 
 .Notes .note-card {
-  background-color: grey;
   height: fit-content;
-  width: 95%;
+  width: 90%;
+}
+.Notes button {
+  width: 80px;
+  height: 40px;
+}
+
+.Notes .trash {
+  margin-left: 20px;
+  font-size: 32px;
 }

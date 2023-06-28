@@ -1,19 +1,18 @@
 .StepByStep {
   display: flex;
   flex-direction: column;
-  align-content: center;
+  align-items: center;
   justify-content: center;
   color: white;
   height: fit-content;
-  width: 101%;
-  margin: 40px;
+  width: 100%;
 }
 
 .StepByStep .directions {
   width: 90%;
 
   box-sizing: border-box;
-  height: 500px;
+  height: fit-content;
   border: 1px solid white;
   background-color: #1e1e1e;
   margin-top: 20px;
@@ -22,7 +21,8 @@
 }
 
 .StepByStep .directions-container {
-  height: 350px;
+  height: fit-content;
+  min-height: 400px;
 }
 
 .StepByStep .directions h2 {
@@ -32,13 +32,82 @@
 .StepByStep .button-container {
   display: flex;
   justify-content: space-around;
+  align-items: flex-end;
+  height: 47%;
+  flex-wrap: wrap;
 }
 
 .StepByStep .button-container button {
   width: 100px;
   height: 50px;
+  margin-top: 10px;
 }
 
 .StepByStep .timer {
   width: 100%;
+}
+
+.StepByStep .star-container {
+  display: flex;
+  flex-direction: row;
+}
+
+.StepByStep .star {
+  font-size: 30px;
+  margin-bottom: 30px;
+}
+
+.StepByStep .rating {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 400px;
+}
+
+.StepByStep .rate-button {
+  padding: 10px;
+  width: 100px;
+}
+
+.StepByStep .last-image img {
+  width: 150px;
+  height: 150px;
+  margin-top: 20px;
+}
+
+.StepByStep .last-image img:hover {
+  transform: scale(2);
+  margin-top: -175px;
+}
+
+.StepByStep .rating-left {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: -90px;
+}
+
+@media only screen and (min-width: 425px) {
+}
+
+@media only screen and (min-width: 768px) {
+  .StepByStep .rating {
+    flex-direction: row;
+    justify-content: space-around;
+    width: 100%;
+    margin-left: 20px;
+    margin-bottom: 20px;
+  }
+
+  .StepByStep .last-image img {
+    width: 300px;
+    height: 300px;
+  }
+  .StepByStep .last-image img:hover {
+    transform: scale(1.25);
+    margin-bottom: -150px;
+  }
 }

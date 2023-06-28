@@ -8,6 +8,7 @@ import { addAccount, getAccountById } from "../services/accountApiService";
 function AuthContextProvider({ children }: { children: ReactNode }) {
   const [user, setUser] = useState<User | null>(null);
   const [account, setAccount] = useState<Account | null>(null);
+  const [hideFavorite, setHideFavorite] = useState<boolean>(false);
 
   useEffect(() => {
     // useEffect to only register once at start
@@ -43,7 +44,16 @@ function AuthContextProvider({ children }: { children: ReactNode }) {
   };
 
   return (
-    <AuthContext.Provider value={{ user, account, checkFavorite, setAccount }}>
+    <AuthContext.Provider
+      value={{
+        user,
+        account,
+        checkFavorite,
+        setAccount,
+        hideFavorite,
+        setHideFavorite,
+      }}
+    >
       {children}
     </AuthContext.Provider>
   );

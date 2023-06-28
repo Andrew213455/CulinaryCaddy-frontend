@@ -1,13 +1,19 @@
 .StepCard {
-  background-color: gray;
+  background-color: #1e1e1e;
   color: white;
   display: flex;
   flex-direction: column;
+  justify-content: center;
   height: fit-content;
-  border-radius: 10px;
   padding: 10px;
-  margin: 20px 0;
-  width: 98%;
+  margin: 20px;
+  align-items: center;
+  border-top: 2px solid white;
+  border-bottom: 2px solid white;
+}
+
+.StepCard h2 {
+  font-size: 18px;
 }
 
 .StepCard .Step-container {

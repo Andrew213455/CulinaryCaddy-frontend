@@ -9,9 +9,11 @@
 }
 
 .RecipeCard img:hover {
-  background-color: black;
-  opacity: 50%;
-  z-index: 1;
+  border: 2px solid white;
+}
+
+.RecipeCard .image-p:hover ~ .image {
+  border: 2px solid white;
 }
 
 .RecipeCard img {
@@ -19,6 +21,10 @@
   width: 225px;
   object-fit: cover;
   border-radius: 10px;
+  background-color: black;
+  opacity: 75%;
+  z-index: 1;
+  box-sizing: border-box;
 }
 
 .RecipeCard .image-container {
@@ -26,6 +32,7 @@
   border-radius: 10px;
   height: 225px;
   box-shadow: 6px 6px 0 0 black;
+  box-sizing: border-box;
 }
 
 .RecipeCard p {
@@ -51,6 +58,21 @@
   font-size: 20px;
   z-index: 4;
   color: white;
+}
+.RecipeCard .star-container {
+  position: absolute;
+  z-index: 4;
+  margin-top: -20px;
+  margin-left: 115px;
+}
+
+.RecipeCard .star {
+  z-index: 4;
+  color: white;
+}
+
+.RecipeCard .stars {
+  display: flex;
 }
 
 @media only screen and (min-width: 425px) {
@@ -78,6 +100,18 @@
   .RecipeCard p {
     width: 135px;
   }
+
+  .RecipeCard .star {
+    line-height: 2px;
+  }
+
+  .RecipeCard .star-container {
+    margin-left: 45px;
+    margin-top: -15px;
+  }
+  .RecipeCard .rating {
+    margin-top: -5px;
+  }
 }
 
 @media only screen and (min-width: 768px) {
@@ -102,5 +136,14 @@
 
   .RecipeCard p {
     width: 150;
+  }
+
+  .RecipeCard .star-container {
+    margin-left: 70px;
+    margin-top: -13px;
+  }
+
+  .RecipeCard .rating {
+    margin-top: -5px;
   }
 }

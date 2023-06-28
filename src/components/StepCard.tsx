@@ -20,9 +20,7 @@ const StepCard = ({ index, step }: Props) => {
     <section className="StepCard">
       <div className="Step-container">
         <h2>Step {step.number}</h2>
-        <p>step: {step.step}</p>
-      </div>
-      <div className="ingredients">
+        <p>Directions: {step.step}</p>
         <p>
           Ingredients:{" "}
           {step.ingredients.map((item, index) => {
